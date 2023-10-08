@@ -6,6 +6,7 @@ import Root from "./routes/root.jsx";
 import ErrorPage from './components/ErrorPage.jsx'
 import Home from './components/Home.jsx';
 
+
 const router = createBrowserRouter([
   {
     path: "/",
