@@ -1,0 +1,14 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* base styles */
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Quicksand";
+}
+
+body {
+  background: #d0cfdf;
+}
