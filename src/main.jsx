@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Root from "./routes/root";
-import ErrorPage from "./components/ErrorPage";
-import Home from "./components/Home";
-import Menu from "./components/Menu";
-import Login from "./components/Login";
-import Cart from "./components/Cart";
+import ErrorPage from "./views/ErrorPage";
+import Home from "./views/Home";
+import Menu from "./views/Menu";
+import Login from "./views/Login";
+import Cart from "./views/Cart";
 
 const router = createBrowserRouter([
   {

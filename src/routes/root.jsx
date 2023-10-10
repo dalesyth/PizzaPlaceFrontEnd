@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../views/Header"
+import Footer from "../views/Footer"
 
 
 
