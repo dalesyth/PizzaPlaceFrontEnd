@@ -38,24 +38,7 @@ const Menu = () => {
           />
         )}
       </div>
-      {/* {!isLoadingToppings && (
-        <MenuItemList
-          title="Toppings"
-          items={toppings.map((topping) => topping.title)}
-        />
-      )}
-      {!isLoadingSauces && (
-        <MenuItemList
-          title="Sauces"
-          items={sauces.map((sauce) => sauce.title)}
-        />
-      )}
-      {!isLoadingCrusts && (
-        <MenuItemList
-          title="Crusts"
-          items={crusts.map((crust) => crust.title)}
-        />
-      )} */}
+      
     </>
   );
 };
