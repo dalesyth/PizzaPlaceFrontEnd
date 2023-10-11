@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -9,10 +8,8 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  console.log(`token is: ${token}`);
-
   const handleEmail = (event) => {
-    setUsername(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handlePassword = (event) => {
@@ -21,51 +18,26 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    try {
-      const response = await loginUser(username, password);
-      // console.log(`response.message: ${response.message}`);
-      // console.log(`response.token: ${response.token}`);
-      // console.log(`response.user: ${response.user}`);
-
-      setToken(response.token);
-      localStorage.setItem("token", response.token);
-
-      alert(`You are now logged in as ${username}!`);
-    } catch (error) {
-      console.error(error);
-    }
-
-    setUsername("");
-    setPassword("");
-    localStorage.setItem("username", username);
-
-    console.log(`username in Login: ${username}`);
-    const token = localStorage.getItem("token");
-    console.log(`token in Login: ${token}`);
-
-    navigate("/Home");
+    
   };
 
-  // console.log(`token is: ${token}`)
-
   return (
-    <div className="Container w-1/2 h-1/2 flex justify-center items-center m-auto mt-10 p-8 bg-gray-100 shadow-lg">
-      <div className="login max-w-md w-full">
-        <h1 className="text-3xl text-center font-bold mb-4">Login</h1>
+    <div className="container mx-auto mt-10">
+      <div className="w-full max-w-md m-auto shadow-md p-8">
+        <h1 className="text-3xl font-bold text-center mb-4">Login</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block mb-2" htmlFor="username">
-              Username
+              Email
             </label>
             <input
               className="w-full rounded shadow-lg"
               type="username"
               id="username"
-              value={username}
-              onChange={handleUsername}
+              value={email}
+              onChange={handleEmail}
               required
-            ></input>
+            />
           </div>
           <div className="mb-4">
             <label className="block mb-2" htmlFor="password">
@@ -78,22 +50,22 @@ const Login = () => {
               value={password}
               onChange={handlePassword}
               required
-            ></input>
+            />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 flex justify-center">
             <button
-              className="w-full shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold"
+              className="w-full sm:w-auto shadow-lg border rounded bg-blue-500 hover:bg-blue-600 text-white font-bold lg:px-2"
               type="submit"
             >
               SUBMIT
             </button>
-            <Link
-              to="/register"
-              className="underline flex justify-center pt-6 text-blue-600"
-            >
-              Don't have an account? Click here to register
-            </Link>
           </div>
+          <Link
+            to="/register"
+            className="text-blue-600 underline block text-center text-sm"
+          >
+            Don't have an account? Click here to register
+          </Link>
         </form>
       </div>
     </div>
