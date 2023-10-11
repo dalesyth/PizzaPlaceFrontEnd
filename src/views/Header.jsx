@@ -35,6 +35,11 @@ const Header = () => {
           >
             <ul className="space-y-2">
               <li>
+                <Link to="/home" id="home" onClick={toggleMenu}>
+                  Home
+                </Link>
+              </li>
+              <li>
                 <Link to="/menu" id="menu" onClick={toggleMenu}>
                   Menu
                 </Link>
