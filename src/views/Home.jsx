@@ -1,9 +1,17 @@
-
+import OrderButton from "../components/OrderButton";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
+    <>
+      <div className="container">
+        <div className="flex justify-center">
+          <OrderButton />
+        </div>
+        <h1 className="flex justify-center text-3xl font-bold">Welcome to The Pizza Place!</h1>
+        
+      </div>
+    </>
+  );
 }
 
 export default Home

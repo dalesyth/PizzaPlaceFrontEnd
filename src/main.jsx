@@ -8,6 +8,7 @@ import Home from "./views/Home";
 import Menu from "./views/Menu";
 import Login from "./views/Login";
 import Cart from "./views/Cart";
+import OrderPage from "./views/OrderPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/order-page",
+        element: <OrderPage />,
       },
     ],
   },
