@@ -5,9 +5,9 @@ const Footer = () => {
     <footer>
       <div
         id="footer"
-        className="container mx-auto p-4 md:p-8 lg:p-16 border-t-4"
+        className="container mx-auto p-4 md:p-4 lg:p-8 border-t-4 text-gray-400"
       >
-        Footer
+        Website by Dale Syth
       </div>
     </footer>
   );

@@ -15,7 +15,7 @@ const Menu = () => {
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center pb-6">
         <OrderButton />
       </div>
       <div className="shadow-lg">

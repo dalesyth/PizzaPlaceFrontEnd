@@ -5,7 +5,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* base styles */
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -17,4 +17,32 @@ body {
   
   background: whitesmoke;
   color: black;
+}
+
+.link-button {
+  background-color: #00b050;;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: ;
+}
+
+@media (max-width: 768px) {
+  .link-button {
+    font-size: .75rem;
+  }
+  .large-screen-text {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .link-button {
+    font-size: 1rem; /* Adjust font size for larger screens */
+  }
+  .small-screen-text {
+    display: none;
+  }
 }
