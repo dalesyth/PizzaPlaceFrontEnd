@@ -2,7 +2,9 @@ import { useFetchData } from "../hooks/useFetchData";
 import { getAllToppings } from "../api/toppings";
 import { getAllSauces } from "../api/sauces";
 import { getAllCrusts } from "../api/crusts";
+import { getAllSides } from "../api/sides";
 import MenuItemList from "../components/MenuItemsList";
+import SideItemList from "../components/SideItemsList";
 import OrderButton from "../components/OrderButton";
 
 const Menu = () => {
@@ -12,6 +14,7 @@ const Menu = () => {
     useFetchData(getAllSauces);
   const { data: crusts, isLoading: isLoadingCrusts } =
     useFetchData(getAllCrusts);
+  const { data: sides, isLoading: isLoadingSides } = useFetchData(getAllSides)
 
   return (
     <>
@@ -38,7 +41,14 @@ const Menu = () => {
           />
         )}
       </div>
-      
+      <div>
+        {!isLoadingSides && (
+          <SideItemList
+            title="Side Orders"
+            items={sides.map((side) => ({ title: side.title, price: side.price }))}
+          />
+        )}
+      </div>
     </>
   );
 };
