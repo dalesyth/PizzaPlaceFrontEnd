@@ -1,10 +1,9 @@
-import axios from "axios";
+import axiosInstance from "./axios";
 
-const APIURL = "http://localhost:3000/api";
 
 export async function getAllSides() {
     try {
-        const response = await axios.get(`${APIURL}/sides`, {
+        const response = await axiosInstance.get(`/sides`, {
             headers: {
                 "Content-Type": "application/json",
             },

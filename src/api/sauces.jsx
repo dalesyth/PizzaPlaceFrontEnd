@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const APIURL = "http://localhost:3000/api";
+import axiosInstance from "./axios";
 
 export async function getAllSauces() {
   try {
-    const response = await axios.get(`${APIURL}/sauces`, {
+    const response = await axiosInstance.get(`/sauces`, {
       headers: {
         "Content-Type": "application/json",
       },

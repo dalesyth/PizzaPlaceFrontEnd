@@ -10,6 +10,8 @@ import Login from "./views/Login";
 import Cart from "./views/Cart";
 import OrderPage from "./views/OrderPage";
 
+import Register from "./views/Register";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/order-page",
         element: <OrderPage />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
   },
