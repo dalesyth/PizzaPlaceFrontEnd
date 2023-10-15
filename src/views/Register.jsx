@@ -114,7 +114,7 @@ const Register = () => {
                   <Link to={`/home`}>Cancel</Link>
                 </button>
               </form>
-              {error && <p className="text-red-500">{setError}</p>}
+              {error && <p className="text-red-500">{error}</p>}
             </div>
           </div>
         </div>

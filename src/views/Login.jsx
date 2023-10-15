@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../api/users";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState(null);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -18,7 +20,18 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
+    if (!email || !password) {
+      setError("Please fill out all fields!");
+    }
+
+    try {
+      const user = await loginUser(email, password);
+      console.log("user from handleSubmit in login: ", user);
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    }
   };
 
   return (
@@ -67,6 +80,7 @@ const Login = () => {
             Don't have an account? Click here to register
           </Link>
         </form>
+        {error && <p className="text-red-500">{error}</p>}
       </div>
     </div>
   );
