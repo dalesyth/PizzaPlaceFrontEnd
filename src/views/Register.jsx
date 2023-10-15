@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { registerUser } from "../api/users";
 
 import React from "react";
 
@@ -43,7 +44,8 @@ const Register = () => {
     }
 
     try {
-        
+        const user = await registerUser(firstName, lastName, email, password);
+        console.log("user from handleSubmit in register: ", user);
     } catch (error) {
         console.error;
         setError(error);
