@@ -4,7 +4,7 @@ const SideItemsList = ({ title, items }) => {
       <div className="flex justify-center font-extrabold mb-1">
         {title.toUpperCase()}
       </div>
-      {/* <div>{items}</div> */}
+
       <ul className="leaders">
         {items.map((item, index) => (
           <li key={index}>
