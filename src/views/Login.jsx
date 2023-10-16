@@ -7,6 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [token, setToken] = useState(null);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const navigate = useNavigate();
 
@@ -28,6 +29,9 @@ const Login = () => {
     try {
       const user = await loginUser(email, password);
       console.log("user from handleSubmit in login: ", user);
+      if (user) {
+        setSuccess(`Thank you for logging in!`)
+      }
     } catch (error) {
       console.error(error);
       setError(error);
@@ -81,6 +85,7 @@ const Login = () => {
           </Link>
         </form>
         {error && <p className="text-red-500">{error}</p>}
+        {success && <p className="text-blue-500">{success}</p>}
       </div>
     </div>
   );
