@@ -16,6 +16,8 @@ export const registerUser = async (firstName, lastName, email, password) => {
 };
 
 export const loginUser = async (email, password) => {
+    console.log("email from loginUser: ", email)
+    console.log("password from loginUser: ", password)
     try {
         const response = await axiosInstance.post("/users/login", {
             email: email,
