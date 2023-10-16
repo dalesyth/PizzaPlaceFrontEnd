@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../api/users";
 import useAuth from "../hooks/useAuth";
 
@@ -9,12 +9,11 @@ const Login = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
- 
- 
-
   const { setAuth } = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/home";
 
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -27,21 +26,22 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-   
-
     try {
       const response = await loginUser(email, password);
-      
-      console.log("Token from login handleSubmit: ", response.token)
-      console.log("email from login handleSubmit: ", email)
 
-      console.log("response from login handleSubmit: ", response)
+      console.log("Token from login handleSubmit: ", response.token);
+      console.log("email from login handleSubmit: ", email);
+
+      console.log("response from login handleSubmit: ", response);
+      console.log("First name from login handleSubmit: ", response.user.first_name)
+
+      const firstName = response.user.first_name
 
       const token = response.token;
-      setAuth({ email, password, token });
-      // if (user) {
-      //   setSuccess(`Thank you for logging in!`)
-      // }
+      setAuth({ firstName, email, password, token });
+      setEmail("");
+      setPassword("");
+      navigate(from, { replace: true });
     } catch (error) {
       console.error(error);
       setError(error);
