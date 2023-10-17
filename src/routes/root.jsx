@@ -7,9 +7,9 @@ import { AuthProvider } from "../contexts/AuthProvider";
 const Root = () => {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   navigate("/home");
-  // }, [navigate]);
+  useEffect(() => {
+    navigate("/home");
+  }, [navigate]);
 
   return (
     <AuthProvider>

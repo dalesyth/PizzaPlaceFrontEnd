@@ -14,18 +14,17 @@ const Home = () => {
         <div className="flex justify-center pb-6">
           <OrderButton />
         </div>
-        {auth ? (
+        {console.log("auth from home: ", auth)}
+        {auth?.firstName ? (
           <h1 className="flex justify-center text-3xl font-bold mb-4 lg:mb-6">
-            Welcome to The Pizza Place, {auth.firstName}!
+            Welcome to The Pizza Place, {auth?.firstName}!
           </h1>
         ) : (
           <h1 className="flex justify-center text-3xl font-bold mb-4 lg:mb-6">
             Welcome to The Pizza Place!
           </h1>
         )}
-        {/* <h1 className="flex justify-center text-3xl font-bold mb-4 lg:mb-6">
-          Welcome to The Pizza Place!
-        </h1> */}
+        
         <img src={pizzaImage} alt="Pizza" />
         <div className="flex mt-4 lg:mt-8 lg:text-xl">
           <p>
