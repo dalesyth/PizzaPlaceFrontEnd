@@ -9,8 +9,8 @@ import Menu from "./views/Menu";
 import Login from "./views/Login";
 import Cart from "./views/Cart";
 import OrderPage from "./views/OrderPage";
-
 import Register from "./views/Register";
+import BuildPizza from "./views/BuildPizza";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/build-pizza",
+        element: <BuildPizza />,
       },
     ],
   },
