@@ -1,6 +1,32 @@
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { getAllSpecialtyPizzas } from "../api/specialtypizzas";
 
 const OrderPage = () => {
+  const [pizzas, setPizzas] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getPizzas = async () => {
+      try {
+        const response = await getAllSpecialtyPizzas();
+
+        
+
+        setPizzas(response);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    };
+    getPizzas();
+    
+  }, []);
+
+
+  console.log("pizzas: ", pizzas)
+
   return (
     <>
       <div>
@@ -11,9 +37,17 @@ const OrderPage = () => {
           <p>Build Your Own Pizza</p>
         </Link>
       </div>
-      
+      <div>
+        {pizzas.map((pizza, index) => (
+          <div key={index}>
+            
+            <span>{pizza.title}</span>
+            <span>{pizza.price}</span>
+          </div>
+        ))}
+      </div>
     </>
   );
-}
+};
 
-export default OrderPage
+export default OrderPage;
