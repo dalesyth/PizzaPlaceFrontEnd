@@ -26,6 +26,7 @@ const OrderPage = () => {
 
 
   console.log("pizzas: ", pizzas)
+  
 
   return (
     <>
@@ -40,9 +41,13 @@ const OrderPage = () => {
       <div>
         {pizzas.map((pizza, index) => (
           <div key={index}>
-            
-            <span>{pizza.title}</span>
-            <span>{pizza.price}</span>
+            <span>{pizza.pizza_name}</span>
+            <span>{pizza.pizza_price}</span>
+            <div>
+              <span>Toppings: {pizza.topping_name}</span>
+              <span>Sauce: {pizza.sauce_name}</span>
+              <span>Crust: {pizza.crust_name}</span>
+            </div>
           </div>
         ))}
       </div>
