@@ -41,10 +41,10 @@ const OrderPage = () => {
       <div>
         {pizzas.map((pizza, index) => (
           <div key={index}>
-            <span>{pizza.pizza_name}</span>
-            <span>{pizza.pizza_price}</span>
+            <span>{pizza.pizzaName}</span>
+            <span>{pizza.pizzaPrice}</span>
             <div>
-              <span>Toppings: {pizza.topping_name}</span>
+              <span>Toppings: {pizza.toppings.toppingName}</span>
               <span>Sauce: {pizza.sauce_name}</span>
               <span>Crust: {pizza.crust_name}</span>
             </div>
