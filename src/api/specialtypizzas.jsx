@@ -10,7 +10,7 @@ export async function getAllSpecialtyPizzas() {
     });
 
     
-    
+    console.log("response.data from getAllSpecialtyPizzas: ", response.data)
     return response.data;
   } catch (error) {
     console.error("Error getting specialty pizzas: ", error);

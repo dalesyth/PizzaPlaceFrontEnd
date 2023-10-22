@@ -11,8 +11,6 @@ const OrderPage = () => {
       try {
         const response = await getAllSpecialtyPizzas();
 
-        
-
         setPizzas(response);
         setIsLoading(false);
       } catch (error) {
@@ -21,12 +19,7 @@ const OrderPage = () => {
       }
     };
     getPizzas();
-    
   }, []);
-
-
-  console.log("pizzas: ", pizzas)
-  
 
   return (
     <>
@@ -39,14 +32,20 @@ const OrderPage = () => {
         </Link>
       </div>
       <div>
-        {pizzas.map((pizza, index) => (
-          <div key={index}>
+        {pizzas.map((pizza, pizzaIndex) => (
+          <div key={pizzaIndex}>
             <span>{pizza.pizzaName}</span>
             <span>{pizza.pizzaPrice}</span>
             <div>
-              <span>Toppings: {pizza.toppings.toppingName}</span>
-              <span>Sauce: {pizza.sauce_name}</span>
-              <span>Crust: {pizza.crust_name}</span>
+              <span>
+                Toppings:
+                {pizza.toppings.map((topping, toppingIndex) => (
+                  <span key={toppingIndex}>{topping.toppingName}</span>
+                ))}
+              </span>
+
+              <span>Sauce: {pizza.sauceName}</span>
+              <span>Crust: {pizza.crustName}</span>
             </div>
           </div>
         ))}
