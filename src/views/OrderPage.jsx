@@ -26,26 +26,37 @@ const OrderPage = () => {
       <div>
         <Link
           to="/build-pizza"
-          className="flex shadow-lg p-2 font-bold text-xs lg:text-base bg-blue-500 text-white hover:bg-blue-600"
+          className="flex shadow-lg p-2 font-bold text-xs lg:text-base bg-blue-500 text-white hover:bg-blue-600 mb-2"
         >
           <p>Build Your Own Pizza</p>
         </Link>
       </div>
       <div>
         {pizzas.map((pizza, pizzaIndex) => (
-          <div key={pizzaIndex}>
-            <span>{pizza.pizzaName}</span>
-            <span>{pizza.pizzaPrice}</span>
-            <div>
-              <span>
-                Toppings:
-                {pizza.toppings.map((topping, toppingIndex) => (
-                  <span key={toppingIndex}>{topping.toppingName}</span>
-                ))}
-              </span>
+          <div key={pizzaIndex} className="bg-green-100 mb-2 p-2">
+            <div className="flex justify-between font-bold">
+              <span>{pizza.pizzaName}</span>
+              <span>{pizza.pizzaPrice}</span>
+            </div>
 
-              <span>Sauce: {pizza.sauceName}</span>
-              <span>Crust: {pizza.crustName}</span>
+            <div>
+              <div>
+                <span className="mr-2">Toppings:</span>
+                <span>
+                  {pizza.toppings.map((topping, toppingIndex) => (
+                    <span key={toppingIndex}>{topping.toppingName}</span>
+                  ))}
+                </span>
+              </div>
+
+              <div>
+                <span className="mr-2">Sauce:</span>
+                <span>{pizza.sauceName}</span>
+              </div>
+              <div>
+                <span className="mr-2">Crust:</span>
+                <span>{pizza.crustName}</span>
+              </div>
             </div>
           </div>
         ))}
