@@ -17,7 +17,7 @@ const Header = () => {
           <Link
             to="/home"
             id="main-logo"
-            className="text-xl font-semibold text-red-500 hover:border-b-4 hover.border-red-500"
+            className="main-title hover:border-b-4 hover.border-red-500"
           >
             The Pizza Place
           </Link>

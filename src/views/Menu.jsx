@@ -21,6 +21,7 @@ const Menu = () => {
       <div className="flex justify-center pb-6">
         <OrderButton />
       </div>
+      <p className="pizzas-heading">Pizzas</p>
       <div className="shadow-lg">
         {!isLoadingToppings && (
           <MenuItemList
@@ -41,6 +42,7 @@ const Menu = () => {
           />
         )}
       </div>
+      <p className="sides-heading">Sides</p>
       <div>
         {!isLoadingSides && (
           <SideItemList

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllSpecialtyPizzas } from "../api/specialtypizzas";
+import { getAllSides } from "../api/sides";
 import useAuth from "../hooks/useAuth";
 
 const OrderPage = () => {
   const [pizzas, setPizzas] = useState([]);
+  const [sides, setSides] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
 
@@ -16,9 +18,11 @@ const OrderPage = () => {
   useEffect(() => {
     const getPizzas = async () => {
       try {
-        const response = await getAllSpecialtyPizzas();
+        const _pizzas = await getAllSpecialtyPizzas();
+        const _sides = await getAllSides();
 
-        setPizzas(response);
+        setPizzas(_pizzas);
+        setSides(_sides);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -43,12 +47,10 @@ const OrderPage = () => {
 
   return (
     <>
-      <div>
-        <Link
-          to="/build-pizza"
-          className="flex shadow-lg p-2 font-bold text-xs lg:text-base bg-blue-500 text-white hover:bg-blue-600 mb-2"
-        >
-          <p>Build Your Own Pizza</p>
+      <p className="pizzas-heading">Pizzas</p>
+      <div className="flex justify-center">
+        <Link to="/build-pizza" className="link-button mb-2">
+          Build Your Own Pizza
         </Link>
       </div>
       <div>
@@ -85,7 +87,55 @@ const OrderPage = () => {
                 </span>
                 <span>
                   <div>
-                    <label className="mr-2 text-xs lg:text-base" htmlFor="quantity">
+                    <label
+                      className="mr-2 text-xs lg:text-base"
+                      htmlFor="quantity"
+                    >
+                      Quantity:
+                    </label>
+                    <input
+                      className="w-12 text-center text-xs lg:text-base"
+                      type="number"
+                      id="quantity"
+                      value={quantity}
+                      onChange={handleQuantity}
+                    ></input>
+                  </div>
+                  <div className="text-right">
+                    <button
+                      className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
+                      onClick={handleAddToCart}
+                    >
+                      Add To Cart
+                    </button>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+        <p className="sides-heading">Sides</p>
+        {sides.map((side, index) => (
+          <div
+            key={index}
+            className="border-black border-2 rounded-lg shadow-lg mb-2 p-2"
+          >
+            <div className="flex justify-between font-bold text-sm lg:text-base">
+              <span>{side.title}</span>
+              <span>{side.price}</span>
+            </div>
+
+            <div>
+              
+
+              <div className="flex justify-between">
+                
+                <span>
+                  <div>
+                    <label
+                      className="mr-2 text-xs lg:text-base"
+                      htmlFor="quantity"
+                    >
                       Quantity:
                     </label>
                     <input

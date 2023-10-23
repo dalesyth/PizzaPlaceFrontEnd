@@ -4,7 +4,7 @@ const OrderButton = () => {
   return (
     <Link
       to={"/order-page/"}
-      //   className="bg-green-400 p-2 rounded-lg text-white font-bold hover:bg-green-600"
+      
       className="link-button shadow-lg"
     >
       <span className="small-screen-text">Order Online</span>
