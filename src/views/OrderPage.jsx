@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllSpecialtyPizzas } from "../api/specialtypizzas";
 import { getAllSides } from "../api/sides";
+import { getOrderByUserId, createNewOrder } from "../api/orders";
 import useAuth from "../hooks/useAuth";
 
 const OrderPage = () => {
@@ -31,15 +32,39 @@ const OrderPage = () => {
 
   const handleQuantity = (event) => {
     setQuantity(event.target.value);
-    
   };
 
   const handleAddToCart = async () => {
-    
+    console.log("You have reached handleAddToCart");
     try {
-      const user_id = auth.userId
+      const user_id = auth.userId;
 
-      const userOrder = await 
+      console.log("user_id from handleAddToCart: ", user_id);
+
+      const userOrder = await getOrderByUserId(user_id);
+
+      console.log("userOrder from handleAddToCart: ", userOrder);
+
+      if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
+        console.log("truthy");
+        try {
+          const response = await createNewOrder({
+            user_id,
+          });
+
+          console.log("response from createNewOrder: ", response);
+          console.log(
+            "response.order_id from createNewOrder: ",
+            response.order_id
+          );
+          const userOrderId = response.order_id;
+          console.log("userOrderId from handleAddToCart: ", userOrderId);
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        console.log("Falsy");
+      }
     } catch (error) {
       console.error(error);
     }
