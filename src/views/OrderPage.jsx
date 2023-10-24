@@ -52,13 +52,7 @@ const OrderPage = () => {
             user_id,
           });
 
-          console.log("response from createNewOrder: ", response);
-          console.log(
-            "response.order_id from createNewOrder: ",
-            response.order_id
-          );
           const userOrderId = response.order_id;
-          console.log("userOrderId from handleAddToCart: ", userOrderId);
         } catch (error) {
           console.error(error);
         }
