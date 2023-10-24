@@ -34,7 +34,7 @@ const OrderPage = () => {
     setQuantity(event.target.value);
   };
 
-  const handleAddToCart = async () => {
+  const handleAddPizzaToCart = async () => {
     console.log("You have reached handleAddToCart");
     try {
       const user_id = auth.userId;
@@ -52,7 +52,12 @@ const OrderPage = () => {
             user_id,
           });
 
-          const userOrderId = response.order_id;
+          const order_id = response.order_id;
+
+          await addPizzaToOrder({
+            order_id,
+            quantity,
+          })
         } catch (error) {
           console.error(error);
         }
@@ -63,6 +68,10 @@ const OrderPage = () => {
       console.error(error);
     }
   };
+
+  const handleAddSideToCart = async () => {
+
+  }
 
   return (
     <>
@@ -123,7 +132,7 @@ const OrderPage = () => {
                   <div className="text-right">
                     <button
                       className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
-                      onClick={handleAddToCart}
+                      onClick={handleAddPizzaToCart}
                     >
                       Add To Cart
                     </button>
@@ -165,7 +174,7 @@ const OrderPage = () => {
                   <div className="text-right">
                     <button
                       className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
-                      onClick={handleAddToCart}
+                      onClick={handleAddSideToCart}
                     >
                       Add To Cart
                     </button>

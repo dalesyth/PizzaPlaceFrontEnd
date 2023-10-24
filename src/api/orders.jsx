@@ -32,3 +32,23 @@ export async function createNewOrder({ user_id }) {
     throw error;
   }
 }
+
+export async function addPizzaToOrder({ order_id, quantity, crust, sauce }) {
+    try {
+        const response = await axiosInstance.post("/ordered_pizza", {
+            order_id,
+            quantity,
+            crust,
+            sauce,
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        return response.data
+    } catch (error) {
+        console.error("Error adding pizza to order: ", error);
+        throw error;
+    }
+}
