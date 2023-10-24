@@ -29,16 +29,13 @@ const Login = () => {
     try {
       const response = await loginUser(email, password);
 
-      console.log("Token from login handleSubmit: ", response.token);
-      console.log("email from login handleSubmit: ", email);
-
-      console.log("response from login handleSubmit: ", response);
-      console.log("First name from login handleSubmit: ", response.user.first_name)
+      
 
       const firstName = response.user.first_name
+      const userId = response.user.user_id
 
       const token = response.token;
-      setAuth({ firstName, email, password, token });
+      setAuth({ userId, firstName, email, password, token });
       setEmail("");
       setPassword("");
       // navigate(from, { replace: true });

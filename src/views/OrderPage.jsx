@@ -10,10 +10,7 @@ const OrderPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
 
-  const { auth } = useAuth()
-
-  
-  
+  const { auth } = useAuth();
 
   useEffect(() => {
     const getPizzas = async () => {
@@ -32,18 +29,21 @@ const OrderPage = () => {
     getPizzas();
   }, []);
 
- 
-
- 
-
   const handleQuantity = (event) => {
     setQuantity(event.target.value);
+    
   };
 
   const handleAddToCart = async () => {
-    const email = auth.email
-    console.log("email from handleAddToCart: ", email)
-  }
+    
+    try {
+      const user_id = auth.userId
+
+      const userOrder = await 
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -126,10 +126,7 @@ const OrderPage = () => {
             </div>
 
             <div>
-              
-
               <div className="flex justify-between">
-                
                 <span>
                   <div>
                     <label
