@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getAllSpecialtyPizzas } from "../api/specialtypizzas";
 import { getAllSides } from "../api/sides";
 import { getOrderByUserId, createNewOrder } from "../api/orders";
+import { getCrustByTitle } from "../api/crusts";
 import useAuth from "../hooks/useAuth";
 
 const OrderPage = () => {
@@ -34,16 +35,33 @@ const OrderPage = () => {
     setQuantity(event.target.value);
   };
 
-  const handleAddPizzaToCart = async () => {
-    console.log("You have reached handleAddToCart");
+  const handleAddPizzaToCart = async (pizzaData) => {
+    const { pizzaName, pizzaPrice, toppingName, sauceName, crustName } =
+      pizzaData;
+
+    console.log("Adding pizza to cart:");
+    console.log("Name:", pizzaName);
+    console.log("Price:", pizzaPrice);
+    console.log("Toppings:", toppingName);
+    console.log("Sauce:", sauceName);
+    console.log("Crust:", crustName);
+
     try {
       const user_id = auth.userId;
 
       console.log("user_id from handleAddToCart: ", user_id);
+      console.log("quantity from handleAddPizzaToCart: ", quantity);
 
-      const userOrder = await getOrderByUserId(user_id);
+      const [userOrder] = await getOrderByUserId(user_id);
+      const crustId = await getCrustByTitle(crustName);
+      const sauceId = await getSauceByTitle(sauceName);
 
       console.log("userOrder from handleAddToCart: ", userOrder);
+      console.log(
+        "userOrder.order_id from handleAddPizzaToCart",
+        userOrder.order_id
+      );
+      console.log("crustId: ", crustId)
 
       if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
         console.log("truthy");
@@ -52,26 +70,30 @@ const OrderPage = () => {
             user_id,
           });
 
-          const order_id = response.order_id;
+          
 
-          await addPizzaToOrder({
-            order_id,
-            quantity,
-          })
+          // await addPizzaToOrder({
+          //   order_id,
+          //   quantity,
+          // });
         } catch (error) {
           console.error(error);
         }
       } else {
-        console.log("Falsy");
+        // const addedPizza = await addPizzaToOrder({
+        //   order_id: userOrder.order_id,
+        //   pizza_price: pizzaPrice,
+        //   quantity: quantity,
+        //   crust: crustId,
+
+        // })
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleAddSideToCart = async () => {
-
-  }
+  const handleAddSideToCart = async () => {};
 
   return (
     <>
@@ -132,7 +154,17 @@ const OrderPage = () => {
                   <div className="text-right">
                     <button
                       className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
-                      onClick={handleAddPizzaToCart}
+                      onClick={() =>
+                        handleAddPizzaToCart({
+                          pizzaName: pizza.pizzaName,
+                          pizzaPrice: pizza.pizzaPrice,
+                          toppingName: pizza.toppings.map(
+                            (topping) => topping.toppingName
+                          ),
+                          sauceName: pizza.sauceName,
+                          crustName: pizza.crustName,
+                        })
+                      }
                     >
                       Add To Cart
                     </button>
