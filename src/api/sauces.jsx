@@ -17,13 +17,13 @@ export async function getAllSauces() {
 
 export async function getSauceByTitle(title) {
   try {
-    const response = await axiosInstance.get(`/crusts/title/${title}`, {
+    const response = await axiosInstance.get(`/sauces/title/${title}`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    return response.data.crust_id;
+    return response.data.sauce_id;
   } catch (error) {
     console.error("Error getting crust by title: ", error);
     throw error;

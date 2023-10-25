@@ -4,6 +4,7 @@ import { getAllSpecialtyPizzas } from "../api/specialtypizzas";
 import { getAllSides } from "../api/sides";
 import { getOrderByUserId, createNewOrder } from "../api/orders";
 import { getCrustByTitle } from "../api/crusts";
+import { getSauceByTitle } from "../api/sauces";
 import useAuth from "../hooks/useAuth";
 
 const OrderPage = () => {
@@ -62,6 +63,7 @@ const OrderPage = () => {
         userOrder.order_id
       );
       console.log("crustId: ", crustId)
+      console.log("sauceId: ", sauceId)
 
       if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
         console.log("truthy");
