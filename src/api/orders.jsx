@@ -35,7 +35,7 @@ export async function createNewOrder({ user_id }) {
 
 export async function addPizzaToOrder({ order_id, quantity, crust, sauce }) {
     try {
-        const response = await axiosInstance.post("/ordered_pizza", {
+        const response = await axiosInstance.post("/ordered-pizza", {
             order_id,
             quantity,
             crust,

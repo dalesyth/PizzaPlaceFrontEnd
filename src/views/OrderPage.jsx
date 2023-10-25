@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getAllSpecialtyPizzas } from "../api/specialtypizzas";
 import { getAllSides } from "../api/sides";
-import { getOrderByUserId, createNewOrder } from "../api/orders";
+import {
+  getOrderByUserId,
+  createNewOrder,
+  addPizzaToOrder,
+} from "../api/orders";
 import { getCrustByTitle } from "../api/crusts";
 import { getSauceByTitle } from "../api/sauces";
 import useAuth from "../hooks/useAuth";
@@ -62,8 +66,8 @@ const OrderPage = () => {
         "userOrder.order_id from handleAddPizzaToCart",
         userOrder.order_id
       );
-      console.log("crustId: ", crustId)
-      console.log("sauceId: ", sauceId)
+      console.log("crustId: ", crustId);
+      console.log("sauceId: ", sauceId);
 
       if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
         console.log("truthy");
@@ -71,8 +75,6 @@ const OrderPage = () => {
           const response = await createNewOrder({
             user_id,
           });
-
-          
 
           // await addPizzaToOrder({
           //   order_id,
@@ -82,13 +84,15 @@ const OrderPage = () => {
           console.error(error);
         }
       } else {
-        // const addedPizza = await addPizzaToOrder({
-        //   order_id: userOrder.order_id,
-        //   pizza_price: pizzaPrice,
-        //   quantity: quantity,
-        //   crust: crustId,
+        const addedPizza = await addPizzaToOrder({
+          order_id: userOrder.order_id,
+          pizza_price: pizzaPrice,
+          quantity: quantity,
+          crust: crustId,
+          sauce: sauceId,
+        });
 
-        // })
+        console.log("addedPizza: ", addedPizza);
       }
     } catch (error) {
       console.error(error);
