@@ -72,19 +72,22 @@ const OrderPage = () => {
       if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
         console.log("truthy");
         try {
-          const response = await createNewOrder({
+          await createNewOrder({
             user_id,
           });
 
-          // await addPizzaToOrder({
-          //   order_id,
-          //   quantity,
-          // });
+          await addPizzaToOrder({
+            order_id: userOrder.order_id,
+            pizza_price: pizzaPrice,
+            quantity: quantity,
+            crust: crustId,
+            sauce: sauceId,
+          });
         } catch (error) {
           console.error(error);
         }
       } else {
-        const addedPizza = await addPizzaToOrder({
+        await addPizzaToOrder({
           order_id: userOrder.order_id,
           pizza_price: pizzaPrice,
           quantity: quantity,
@@ -92,7 +95,7 @@ const OrderPage = () => {
           sauce: sauceId,
         });
 
-        console.log("addedPizza: ", addedPizza);
+        
       }
     } catch (error) {
       console.error(error);
