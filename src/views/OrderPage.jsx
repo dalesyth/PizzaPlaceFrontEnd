@@ -7,6 +7,7 @@ import {
   createNewOrder,
   addPizzaToOrder,
   attachToppingsToOrderedPizza,
+  addSideToOrder,
 } from "../api/orders";
 
 import useAuth from "../hooks/useAuth";
@@ -78,8 +79,11 @@ const OrderPage = () => {
     }
   };
 
-  const handleAddSideToCart = async () => {
+  const handleAddSideToCart = async (side_option_id) => {
     console.log("sides from handleAddSideToCart:", sides)
+    console.log("sides.side_option_id from handleAddSideToCart:", sides.side_option_id)
+    console.log("[sides] from handleAddSideToCart:", [sides])
+    console.log("side_option_id passed into handleAddSideToCart:", side_option_id)
     try {
       const user_id = auth.userId;
 
@@ -91,7 +95,12 @@ const OrderPage = () => {
         });
       }
 
-      
+      await addSideToOrder({
+        sideId: side_option_id,
+        orderId: userOrder.order_id,
+      })
+
+
     } catch (error) {
       console.error(error);
     }
@@ -213,7 +222,7 @@ const OrderPage = () => {
                   <div className="text-right">
                     <button
                       className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
-                      onClick={handleAddSideToCart}
+                      onClick={() => handleAddSideToCart(side.side_option_id)}
                     >
                       Add To Cart
                     </button>
