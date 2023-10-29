@@ -42,40 +42,16 @@ const OrderPage = () => {
 
   const handleAddPizzaToCart = async (pizzaData) => {
     const {
-      pizzaName,
       pizzaPrice,
-      toppingName,
       toppingId,
-      sauceName,
       sauceId,
-      crustName,
       crustId,
     } = pizzaData;
-
-    console.log("Adding pizza to cart:");
-    console.log("pizzaData: ", pizzaData);
-    console.log("Name:", pizzaName);
-    console.log("Price:", pizzaPrice);
-    console.log("toppingName:", toppingName);
-    console.log("toppingId", toppingId);
-    console.log("sauceName:", sauceName);
-    console.log("sauceId:", sauceId);
-    console.log("crustName:", crustName);
-    console.log("crustId:", crustId);
 
     try {
       const user_id = auth.userId;
 
-      console.log("user_id from handleAddToCart: ", user_id);
-      console.log("quantity from handleAddPizzaToCart: ", quantity);
-
       const [userOrder] = await getOrderByUserId(user_id);
-
-      console.log("userOrder from handleAddToCart: ", userOrder);
-      console.log(
-        "userOrder.order_id from handleAddPizzaToCart",
-        userOrder.order_id
-      );
 
       if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
         await createNewOrder({
@@ -102,7 +78,24 @@ const OrderPage = () => {
     }
   };
 
-  const handleAddSideToCart = async () => {};
+  const handleAddSideToCart = async () => {
+    console.log("sides from handleAddSideToCart:", sides)
+    try {
+      const user_id = auth.userId;
+
+      const [userOrder] = await getOrderByUserId(user_id);
+
+      if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
+        await createNewOrder({
+          user_id,
+        });
+      }
+
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>

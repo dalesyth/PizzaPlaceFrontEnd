@@ -100,3 +100,25 @@ export async function attachToppingsToOrderedPizza({ topping_id, pizza_id }) {
   return responses; 
 }
 
+export async function addSideToOrder({ sideId, orderId }) {
+  try {
+    const response = await axiosInstance.patch(
+      `/sides/${orderId}/add-side`,
+      {
+        sideId,
+        orderId,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error adding side to order:", error)
+    throw error;
+  }
+}
+
