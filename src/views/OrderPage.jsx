@@ -6,9 +6,9 @@ import {
   getOrderByUserId,
   createNewOrder,
   addPizzaToOrder,
+  attachToppingsToOrderedPizza,
 } from "../api/orders";
-import { getCrustByTitle } from "../api/crusts";
-import { getSauceByTitle } from "../api/sauces";
+
 import useAuth from "../hooks/useAuth";
 
 const OrderPage = () => {
@@ -41,15 +41,27 @@ const OrderPage = () => {
   };
 
   const handleAddPizzaToCart = async (pizzaData) => {
-    const { pizzaName, pizzaPrice, toppingName, sauceName, crustName } =
-      pizzaData;
+    const {
+      pizzaName,
+      pizzaPrice,
+      toppingName,
+      toppingId,
+      sauceName,
+      sauceId,
+      crustName,
+      crustId,
+    } = pizzaData;
 
     console.log("Adding pizza to cart:");
+    console.log("pizzaData: ", pizzaData);
     console.log("Name:", pizzaName);
     console.log("Price:", pizzaPrice);
-    console.log("Toppings:", toppingName);
-    console.log("Sauce:", sauceName);
-    console.log("Crust:", crustName);
+    console.log("toppingName:", toppingName);
+    console.log("toppingId", toppingId);
+    console.log("sauceName:", sauceName);
+    console.log("sauceId:", sauceId);
+    console.log("crustName:", crustName);
+    console.log("crustId:", crustId);
 
     try {
       const user_id = auth.userId;
@@ -58,45 +70,33 @@ const OrderPage = () => {
       console.log("quantity from handleAddPizzaToCart: ", quantity);
 
       const [userOrder] = await getOrderByUserId(user_id);
-      const crustId = await getCrustByTitle(crustName);
-      const sauceId = await getSauceByTitle(sauceName);
 
       console.log("userOrder from handleAddToCart: ", userOrder);
       console.log(
         "userOrder.order_id from handleAddPizzaToCart",
         userOrder.order_id
       );
-      console.log("crustId: ", crustId);
-      console.log("sauceId: ", sauceId);
 
       if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
-        console.log("truthy");
-        try {
-          await createNewOrder({
-            user_id,
-          });
-
-          await addPizzaToOrder({
-            order_id: userOrder.order_id,
-            pizza_price: pizzaPrice,
-            quantity: quantity,
-            crust: crustId,
-            sauce: sauceId,
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      } else {
-        await addPizzaToOrder({
-          order_id: userOrder.order_id,
-          pizza_price: pizzaPrice,
-          quantity: quantity,
-          crust: crustId,
-          sauce: sauceId,
+        await createNewOrder({
+          user_id,
         });
-
-        
       }
+
+      const orderedPizza = await addPizzaToOrder({
+        order_id: userOrder.order_id,
+        pizza_price: pizzaPrice,
+        quantity: quantity,
+        crust: crustId,
+        sauce: sauceId,
+      });
+
+      const pizzaId = orderedPizza.ordered_pizza_id;
+
+      await attachToppingsToOrderedPizza({
+        topping_id: toppingId,
+        pizza_id: pizzaId,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -170,8 +170,13 @@ const OrderPage = () => {
                           toppingName: pizza.toppings.map(
                             (topping) => topping.toppingName
                           ),
+                          toppingId: pizza.toppings.map(
+                            (topping) => topping.toppingId
+                          ),
                           sauceName: pizza.sauceName,
+                          sauceId: pizza.sauceId,
                           crustName: pizza.crustName,
+                          crustId: pizza.crustId,
                         })
                       }
                     >
