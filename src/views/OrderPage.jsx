@@ -17,7 +17,7 @@ import useAuth from "../hooks/useAuth";
 import { useFetchData } from "../hooks/useFetchData";
 import { CartContext } from "../contexts/Cart";
 
-const { cartItems, addToCart } = useContext(CartContext);
+
 
 const OrderPage = () => {
   const [quantity, setQuantity] = useState(1);
