@@ -1,11 +1,13 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-const PizzaItem = ({ pizza, quantity, handleQuantity, handleAddPizzaToCart }) => {
+const PizzaItem = ({
+  pizza,
+  quantity,
+  handleQuantity,
+  handleAddPizzaToCart,
+}) => {
   return (
-    <div
-      
-      className="border-black border-2 rounded-lg shadow-lg mb-2 p-2"
-    >
+    <div className="border-black border-2 rounded-lg shadow-lg mb-2 p-2">
       <div className="flex justify-between font-bold text-sm lg:text-base">
         <span>{pizza.pizzaName}</span>
         <span>{pizza.pizzaPrice}</span>
@@ -16,7 +18,10 @@ const PizzaItem = ({ pizza, quantity, handleQuantity, handleAddPizzaToCart }) =>
           <span className="mr-2">Toppings:</span>
           <p>
             {pizza.toppings.map((topping, toppingIndex) => (
-              <span key={toppingIndex}>{topping.toppingName}</span>
+              <span key={toppingIndex}>
+                {topping.toppingName}
+                {toppingIndex < pizza.toppings.length - 1 ? ", " : ""}
+              </span>
             ))}
           </p>
         </div>
@@ -73,7 +78,7 @@ const PizzaItem = ({ pizza, quantity, handleQuantity, handleAddPizzaToCart }) =>
       </div>
     </div>
   );
-}
+};
 
 PizzaItem.propTypes = {
   pizza: PropTypes.shape({
@@ -95,4 +100,4 @@ PizzaItem.propTypes = {
   handleAddPizzaToCart: PropTypes.func.isRequired,
 };
 
-export default PizzaItem
+export default PizzaItem;
