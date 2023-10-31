@@ -6,9 +6,18 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
 
   const addToCart = (item) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
+    console.log("item from addToCart:", item)
+    console.log("item.title from addToCart:", item.title)
+    
+    const isItemInCart = cartItems.find((cartItem) => cartItem.title === item.title);
+
+   
+
+
+    
 
     if (isItemInCart) {
+        console.log("isItemInCart is truthy")
       setCartItems(
         cartItems.map((cartItem) =>
           cartItem.id === item.id
@@ -17,6 +26,7 @@ export const CartProvider = ({ children }) => {
         )
       );
     } else {
+        console.log("isItemInCart is falsy")
       setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
   };
@@ -55,6 +65,8 @@ export const CartProvider = ({ children }) => {
       setCartItems(JSON.parse(cartItems));
     }
   }, []);
+
+  console.log("cartItems from Cart context:", cartItems)
 
   return (
     <CartContext.Provider

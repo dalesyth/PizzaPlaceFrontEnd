@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { getAllSpecialtyPizzas } from "../api/specialtypizzas";
 import { getAllSides } from "../api/sides";
@@ -15,6 +15,9 @@ import SideItem from "../components/SideItem";
 
 import useAuth from "../hooks/useAuth";
 import { useFetchData } from "../hooks/useFetchData";
+import { CartContext } from "../contexts/Cart";
+
+const { cartItems, addToCart } = useContext(CartContext);
 
 const OrderPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -65,6 +68,8 @@ const OrderPage = () => {
     }
   };
 
+ 
+
   const handleAddSideToCart = async (side_option_id) => {
     try {
       const user_id = auth.userId;
@@ -114,6 +119,8 @@ const OrderPage = () => {
             handleAddSideToCart={handleAddSideToCart}
           />
         ))}
+        
+        
       </div>
     </>
   );

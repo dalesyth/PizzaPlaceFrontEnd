@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { CartContext } from "../contexts/Cart";
 
 const PizzaItem = ({
   pizza,
@@ -6,6 +8,7 @@ const PizzaItem = ({
   handleQuantity,
   handleAddPizzaToCart,
 }) => {
+  const { cartItems, addToCart } = useContext(CartContext);
   return (
     <div className="border-black border-2 rounded-lg shadow-lg mb-2 p-2">
       <div className="flex justify-between font-bold text-sm lg:text-base">
@@ -51,7 +54,7 @@ const PizzaItem = ({
               ></input>
             </div>
             <div className="text-right">
-              <button
+              {/* <button
                 className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
                 onClick={() =>
                   handleAddPizzaToCart({
@@ -69,6 +72,12 @@ const PizzaItem = ({
                     crustId: pizza.crustId,
                   })
                 }
+              >
+                Add To Cart
+              </button> */}
+              <button
+                className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
+                onClick={() => addToCart(pizza)}
               >
                 Add To Cart
               </button>
