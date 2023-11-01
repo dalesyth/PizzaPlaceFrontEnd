@@ -13,7 +13,7 @@ const Cart = () => {
             <div className="flex gap-4">
               
               <div className="flex flex-col">
-                <h1 className="text-lg font-bold">{item.pizzaName ? item.pizzaName : item.title}</h1>
+                <h1 className="text-lg font-bold">{item.title}</h1>
                 <p className="text-gray-600">{item.price}</p>
               </div>
             </div>

@@ -1,13 +1,9 @@
-import PropTypes from 'prop-types';
-import { useContext } from 'react'
-import { CartContext } from '../contexts/Cart';
-
+import PropTypes from "prop-types";
+import { useContext } from "react";
+import { CartContext } from "../contexts/Cart";
 
 const SideItem = ({ side, quantity, handleQuantity, handleAddSideToCart }) => {
-
-  const { cartItems, addToCart } = useContext(CartContext)
-
-  
+  const { cartItems, addToCart } = useContext(CartContext);
 
   return (
     <div className="border-black border-2 rounded-lg shadow-lg mb-2 p-2">
@@ -17,10 +13,10 @@ const SideItem = ({ side, quantity, handleQuantity, handleAddSideToCart }) => {
       </div>
 
       <div>
-        <div className="flex justify-between">
+        <div className="flex-col">
           <span>
             <div>
-              <label className="mr-2 text-xs lg:text-base" htmlFor="quantity">
+              {/* <label className="mr-2 text-xs lg:text-base" htmlFor="quantity">
                 Quantity:
               </label>
               <input
@@ -29,7 +25,7 @@ const SideItem = ({ side, quantity, handleQuantity, handleAddSideToCart }) => {
                 id="quantity"
                 value={quantity}
                 onChange={handleQuantity}
-              ></input>
+              ></input> */}
             </div>
             <div className="text-right">
               {/* <button
@@ -44,14 +40,13 @@ const SideItem = ({ side, quantity, handleQuantity, handleAddSideToCart }) => {
               >
                 Add To Cart
               </button>
-              
             </div>
           </span>
         </div>
       </div>
     </div>
   );
-}
+};
 
 SideItem.propTypes = {
   side: PropTypes.shape({
@@ -62,7 +57,6 @@ SideItem.propTypes = {
   quantity: PropTypes.number.isRequired,
   handleQuantity: PropTypes.func.isRequired,
   handleAddSideToCart: PropTypes.func.isRequired,
- 
 };
 
-export default SideItem
+export default SideItem;

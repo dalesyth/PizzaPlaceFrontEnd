@@ -12,8 +12,8 @@ const PizzaItem = ({
   return (
     <div className="border-black border-2 rounded-lg shadow-lg mb-2 p-2">
       <div className="flex justify-between font-bold text-sm lg:text-base">
-        <span>{pizza.pizzaName}</span>
-        <span>{pizza.pizzaPrice}</span>
+        <span>{pizza.title}</span>
+        <span>{pizza.price}</span>
       </div>
 
       <div>
@@ -41,7 +41,7 @@ const PizzaItem = ({
             </div>
           </span>
           <span>
-            <div>
+            {/* <div>
               <label className="mr-2 text-xs lg:text-base" htmlFor="quantity">
                 Quantity:
               </label>
@@ -52,7 +52,7 @@ const PizzaItem = ({
                 value={quantity}
                 onChange={handleQuantity}
               ></input>
-            </div>
+            </div> */}
             <div className="text-right">
               {/* <button
                 className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
