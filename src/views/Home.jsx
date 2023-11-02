@@ -15,7 +15,7 @@ const Home = () => {
           <OrderButton />
         </div>
         {console.log("auth from home: ", auth)}
-        {auth?.firstName ? (
+        {auth?.token ? (
           <h1 className="flex justify-center text-3xl font-bold mb-4 lg:mb-6">
             Welcome to The Pizza Place, {auth?.firstName}!
           </h1>

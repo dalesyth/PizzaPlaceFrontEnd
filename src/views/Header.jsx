@@ -2,9 +2,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { auth } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -44,11 +47,24 @@ const Header = () => {
                   Menu
                 </Link>
               </li>
-              <li>
+              {auth?.token ? (
+                <li>
+                  <Link to="/logout" id="logout" onClick={toggleMenu}>
+                    Logout
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link to="/login" id="login" onClick={toggleMenu}>
+                    Login
+                  </Link>
+                </li>
+              )}
+              {/* <li>
                 <Link to="/login" id="login" onClick={toggleMenu}>
                   Login
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/cart" id="cart" onClick={toggleMenu}>
                   {/* <FontAwesomeIcon icon={faCartShopping} className="text-xl" />{" "} */}
