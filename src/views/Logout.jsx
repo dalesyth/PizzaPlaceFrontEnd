@@ -1,10 +1,14 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Logout = () => {
+  const { setAuth } = useAuth();
+
   useEffect(() => {
     console.log("Logout useEffect reached");
-    localStorage.clear();
+    setAuth({})
+    localStorage.removeItem('auth');
   }, []);
 
   return (
