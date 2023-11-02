@@ -13,7 +13,7 @@ const MenuItemList = ({ title, items }) => {
 
 MenuItemList.propTypes = {
   title: PropTypes.string.isRequired,
-  items: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired,
 }
 
 export default MenuItemList;
