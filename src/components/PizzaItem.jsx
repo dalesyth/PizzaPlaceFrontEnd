@@ -13,7 +13,7 @@ const PizzaItem = ({
     <div className="border-black border-2 rounded-lg shadow-lg mb-2 p-2">
       <div className="flex justify-between font-bold text-sm lg:text-base">
         <span>{pizza.title}</span>
-        <span>{pizza.price}</span>
+        <span>${pizza.price}</span>
       </div>
 
       <div>
@@ -91,10 +91,10 @@ const PizzaItem = ({
 
 PizzaItem.propTypes = {
   pizza: PropTypes.shape({
-    pizzaName: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     sauceName: PropTypes.string.isRequired,
     crustName: PropTypes.string.isRequired,
-    pizzaPrice: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
     sauceId: PropTypes.number.isRequired,
     crustId: PropTypes.number.isRequired,
     toppings: PropTypes.arrayOf(

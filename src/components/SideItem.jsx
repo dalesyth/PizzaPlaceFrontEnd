@@ -9,7 +9,7 @@ const SideItem = ({ side, quantity, handleQuantity, handleAddSideToCart }) => {
     <div className="border-black border-2 rounded-lg shadow-lg mb-2 p-2">
       <div className="flex justify-between font-bold text-sm lg:text-base">
         <span>{side.title}</span>
-        <span>{side.price}</span>
+        <span>${side.price}</span>
       </div>
 
       <div>
@@ -51,7 +51,7 @@ const SideItem = ({ side, quantity, handleQuantity, handleAddSideToCart }) => {
 SideItem.propTypes = {
   side: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
     side_option_id: PropTypes.number.isRequired,
   }),
   quantity: PropTypes.number.isRequired,
