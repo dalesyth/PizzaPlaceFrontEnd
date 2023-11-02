@@ -68,15 +68,49 @@ export async function addPizzaToOrder({
   }
 }
 
+// export async function attachToppingsToOrderedPizza({ topping_id, pizza_id }) {
+//   const responses = [];
+
+//   for (const toppingId of topping_id) {
+//     try {
+//       const response = await axiosInstance.patch(
+//         `/toppings/${pizza_id}/addTopping`,
+//         {
+//           toppingId,
+//           pizzaId: pizza_id,
+//         },
+//         {
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       );
+
+//       responses.push(response.data);
+//       console.log(`Topping ${toppingId} attached to ordered pizza ${pizza_id}`);
+//     } catch (error) {
+//       console.error(
+//         `Error attaching topping ${toppingId} to ordered pizza ${pizza_id}:`,
+//         error
+//       );
+      
+//     }
+//   }
+
+//   return responses; 
+// }
+
 export async function attachToppingsToOrderedPizza({ topping_id, pizza_id }) {
   const responses = [];
 
-  for (const toppingId of topping_id) {
+  const toppingIds = Array.isArray(topping_id) ? topping_id : [topping_id]; // Ensure it's an array
+
+  for (const toppingId of toppingIds) {
     try {
       const response = await axiosInstance.patch(
         `/toppings/${pizza_id}/addTopping`,
         {
-          toppingId,
+          toppingId: toppingId, // Use the current toppingId in the loop
           pizzaId: pizza_id,
         },
         {
@@ -93,12 +127,12 @@ export async function attachToppingsToOrderedPizza({ topping_id, pizza_id }) {
         `Error attaching topping ${toppingId} to ordered pizza ${pizza_id}:`,
         error
       );
-      
     }
   }
 
-  return responses; 
+  return responses;
 }
+
 
 export async function addSideToOrder({ sideId, orderId }) {
   try {
