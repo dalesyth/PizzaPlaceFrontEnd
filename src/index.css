@@ -33,6 +33,12 @@ body {
   color: #EF4444;
 }
 
+.toppings-heading, .sauce-heading, .crust-heading {
+  color: #EF4444;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
 
 .link-button {
   background-color: #00b050;

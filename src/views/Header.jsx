@@ -49,8 +49,8 @@ const Header = () => {
               </li>
               {auth?.token ? (
                 <li>
-                  <Link to="/logout" id="logout" onClick={toggleMenu}>
-                    Logout
+                  <Link to="/user-profile" id="profile" onClick={toggleMenu}>
+                    Profile
                   </Link>
                 </li>
               ) : (

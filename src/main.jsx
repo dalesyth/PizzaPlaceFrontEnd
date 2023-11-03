@@ -12,6 +12,7 @@ import OrderPage from "./views/OrderPage";
 import Register from "./views/Register";
 import BuildPizza from "./views/BuildPizza";
 import Logout from "./views/Logout";
+import UserProfile from "./views/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/logout",
         element: <Logout />,
+      },
+      {
+        path: "/user-profile",
+        element: <UserProfile />,
       },
     ],
   },

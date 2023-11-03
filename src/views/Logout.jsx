@@ -7,8 +7,8 @@ const Logout = () => {
 
   useEffect(() => {
     console.log("Logout useEffect reached");
-    setAuth({})
-    localStorage.removeItem('auth');
+    setAuth({});
+    localStorage.removeItem("auth");
   }, []);
 
   return (

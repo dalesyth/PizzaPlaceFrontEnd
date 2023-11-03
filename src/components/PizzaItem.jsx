@@ -17,26 +17,26 @@ const PizzaItem = ({
       </div>
 
       <div>
-        <div className="text-xs lg:text-base">
-          <span className="mr-2">Toppings:</span>
-          <p>
+        <div className="text-xs lg:text-base w-4/5">
+          <span className="toppings-heading">Toppings:</span>
+          <span>
             {pizza.toppings.map((topping, toppingIndex) => (
               <span key={toppingIndex}>
                 {topping.toppingName}
                 {toppingIndex < pizza.toppings.length - 1 ? ", " : ""}
               </span>
             ))}
-          </p>
+          </span>
         </div>
 
         <div className="flex justify-between">
           <span>
             <div className="text-xs lg:text-base">
-              <span className="mr-2">Sauce:</span>
+              <span className="sauce-heading">Sauce:</span>
               <span>{pizza.sauceName}</span>
             </div>
             <div className="text-xs lg:text-base">
-              <span className="mr-2">Crust:</span>
+              <span className="crust-heading">Crust:</span>
               <span>{pizza.crustName}</span>
             </div>
           </span>
