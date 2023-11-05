@@ -3,7 +3,7 @@ import AuthContext from "../contexts/AuthProvider";
 
 const useAuth = () => {
   const { auth, setAuth } = useContext(AuthContext);
-  console.log("auth from useAuth: ", auth);
+  // console.log("auth from useAuth: ", auth);
   useDebugValue(auth, (auth) => (auth?.token ? "Logged In" : "Logged Out"));
 
   

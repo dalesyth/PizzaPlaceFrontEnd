@@ -5,8 +5,8 @@ import useAuth from "../hooks/useAuth";
 const Home = () => {
   const { auth } = useAuth();
 
-  console.log("auth from Home: ", auth)
-  console.log("auth.firstName from Home: ", auth.firstName)
+  // console.log("auth from Home: ", auth)
+  // console.log("auth.firstName from Home: ", auth.firstName)
 
   return (
     <>

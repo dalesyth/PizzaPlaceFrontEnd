@@ -17,14 +17,14 @@ export async function getOrderByUserId(user_id) {
 }
 
 export async function getOrderedPizzaByOrderId(order_id) {
-  console.log("order_id from getOrderedPizzaByOrderId:", order_id)
+  
   try {
     const response = await axiosInstance.get(`/ordered-pizza/${order_id}/order`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log("response.data from getOrderedPizzaByOrderId:", response.data)
+    
     return response.data;
   } catch (error) {
     console.error("Error getting ordered pizza by orderId:", error)
