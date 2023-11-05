@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getOrderByUserId, getOrderedPizzaByOrderId } from "../api/orders";
-import { getOrderedSidesByOrderId } from "../api/sides";
 
 import useAuth from "../hooks/useAuth";
 
@@ -16,23 +15,14 @@ const UserProfile = () => {
   useEffect(() => {
     const getUserOrders = async () => {
       try {
-        const userOrders = await getOrderByUserId(auth.userId);
+        const [userOrders] = await getOrderByUserId(auth.userId);
 
-        console.log("userOrders from UserProfile:", userOrders);
+        const orderId = userOrders.order_id;
 
-        for (const userOrder of userOrders) {
-          const order_id = userOrder.order_id;
-          console.log("order_id from getUserOrders:", order_id);
-          try {
-            const orderedPizza = await getOrderedPizzaByOrderId(order_id);
-            const orderedSides = await getOrderedSidesByOrderId(order_id);
+        const orderedPizzas = await getOrderedPizzaByOrderId(orderId);
 
-            console.log("orderedPizza from getUserOrders:", orderedPizza);
-            console.log("orderedSides from getUserOrders:", orderedSides);
-          } catch (error) {
-            console.error("Error getting ordered pizza:", error);
-          }
-        }
+        setOrders(userOrders);
+        setPizzas(orderedPizzas);
       } catch (error) {
         console.error(error);
       }
