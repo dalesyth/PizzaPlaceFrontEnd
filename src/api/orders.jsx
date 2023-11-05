@@ -80,8 +80,8 @@ export async function attachToppingsToOrderedPizza({ topping_id, pizza_id }) {
       const response = await axiosInstance.patch(
         `/toppings/${pizza_id}/addTopping`,
         {
-          toppingId: toppingId,
-          pizzaId: pizza_id,
+          topping_id: toppingId,
+          pizza_id,
         },
         {
           headers: {
@@ -99,7 +99,7 @@ export async function attachToppingsToOrderedPizza({ topping_id, pizza_id }) {
       );
     }
   }
-
+  console.log("responses from attachToppingsToOrderedPizza:", responses)
   return responses;
 }
 
