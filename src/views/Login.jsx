@@ -29,13 +29,12 @@ const Login = () => {
     try {
       const response = await loginUser(email, password);
 
-      
-
-      const firstName = response.user.first_name
-      const userId = response.user.user_id
+      const firstName = response.user.first_name;
+      const lastName = response.user.last_name;
+      const userId = response.user.user_id;
 
       const token = response.token;
-      setAuth({ userId, firstName, email, password, token });
+      setAuth({ userId, firstName, lastName, email, password, token });
       setEmail("");
       setPassword("");
       // navigate(from, { replace: true });
