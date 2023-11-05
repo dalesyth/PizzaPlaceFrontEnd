@@ -14,7 +14,7 @@ const Home = () => {
         <div className="flex justify-center pb-6">
           <OrderButton />
         </div>
-        {console.log("auth from home: ", auth)}
+        {/* {console.log("auth from home: ", auth)} */}
         {auth?.token ? (
           <h1 className="flex justify-center text-3xl font-bold mb-4 lg:mb-6">
             Welcome to The Pizza Place, {auth?.firstName}!

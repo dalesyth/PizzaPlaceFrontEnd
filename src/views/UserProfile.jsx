@@ -23,28 +23,51 @@ const UserProfile = () => {
   }, [auth.userId]);
 
   useEffect(() => {
-    const getOrderedPizzasAndSides = async (order) => {
+    const fetchOrderedPizzasAndSides = async (order) => {
       try {
         const pizzas = await getOrderedPizzaByOrderId(order.order_id);
         const sides = await getOrderedSidesByOrderId(order.order_id);
 
-        // Here, we're using order.order_id as the key to store ordered pizzas and sides
-        setOrderedPizzas({ ...orderedPizzas, [order.order_id]: pizzas });
-        setOrderedSides({ ...orderedSides, [order.order_id]: sides });
+        return { orderId: order.order_id, pizzas, sides };
       } catch (error) {
         console.error(error);
+        return null;
       }
     };
 
-    // Make sure to iterate over the orders array correctly
-    orders.forEach((order) => {
-      getOrderedPizzasAndSides(order);
-    });
+    const loadOrderedPizzasAndSides = async () => {
+      const promises = orders.map(fetchOrderedPizzasAndSides);
+
+      // Use Promise.all to wait for all the asynchronous calls to complete
+      const results = await Promise.all(promises);
+
+      // Filter out any failed results (e.g., where fetching pizzas or sides failed)
+      const validResults = results.filter((result) => result !== null);
+
+      // Organize the valid results into an object for easier access
+      const orderedPizzasData = {};
+      const orderedSidesData = {};
+
+      validResults.forEach(({ orderId, pizzas, sides }) => {
+        orderedPizzasData[orderId] = pizzas;
+        orderedSidesData[orderId] = sides;
+      });
+
+      setOrderedPizzas(orderedPizzasData);
+      setOrderedSides(orderedSidesData);
+    };
+
+    loadOrderedPizzasAndSides();
   }, [orders]);
 
-  console.log("orders from UserProfile:", orders)
-  console.log("orderedPizzas from UserProfile:", orderedPizzas)
-  console.log("orderedSides from UserProfile:", orderedSides)
+  function formatDate(dateString) {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
+  console.log("orders from UserProfile:", orders);
+  console.log("orderedPizzas from UserProfile:", orderedPizzas);
+  console.log("orderedSides from UserProfile:", orderedSides);
 
   return (
     <>
@@ -67,22 +90,22 @@ const UserProfile = () => {
           </Link>
         </span>
       </div>
-      <div className="flex justify-between mt-8 shadow-lg">
+      <div className="flex justify-between mt-8 bg-gray-200">
         <span>
-          <p className="font-bold">Previous Orders:</p>
+          <p className="flex justify-center font-bold">Previous Orders:</p>
           <div>
             {orders.map((order, index) => (
-              <div key={index}>
+              <div key={index} className="shadow-lg mb-6 bg-white">
                 <div>
-                  <h2>Ordered Pizzas:</h2>
+                  <h2 className="order-heading">Ordered Pizza:</h2>
                   <div>
                     {orderedPizzas[order.order_id] &&
                       orderedPizzas[order.order_id].map(
                         (orderedPizza, pizzaIndex) => (
                           <div key={pizzaIndex}>
                             <div>
-                              <span>Order Date: </span>
-                              <span>{order.order_date}</span>
+                              <span className="font-bold">Order Date: </span>
+                              <span>{formatDate(order.order_date)}</span>
                             </div>
                             <p>
                               <span className="font-bold">Price: </span>
@@ -94,13 +117,14 @@ const UserProfile = () => {
                                 (topping, toppingIndex) => (
                                   <span key={toppingIndex}>
                                     {topping.title}
-                                    {toppingIndex < orderedPizza.ordered_pizza_toppings.length - 1
+                                    {toppingIndex <
+                                    orderedPizza.ordered_pizza_toppings.length -
+                                      1
                                       ? ", "
                                       : ""}
                                   </span>
                                 )
                               )}
-                              <span>{orderedPizza.ordered_pizza_topping}</span>
                             </p>
                             <p>
                               <span className="font-bold">Crust: </span>
@@ -116,7 +140,7 @@ const UserProfile = () => {
                   </div>
                 </div>
                 <div>
-                  <h2>Ordered Sides:</h2>
+                  <h2 className="order-heading">Ordered Side:</h2>
                   <div>
                     {orderedSides[order.order_id] &&
                       orderedSides[order.order_id].map(
@@ -124,12 +148,9 @@ const UserProfile = () => {
                           <div key={sideIndex}>
                             <p>
                               <span className="font-bold">Name: </span>
-                              <span>{orderedSide.side_name}</span>
+                              <span>{orderedSide.side_option_title}</span>
                             </p>
-                            <p>
-                              <span className="font-bold">Quantity: </span>
-                              <span>{orderedSide.quantity}</span>
-                            </p>
+                            
                             <p>
                               <span className="font-bold">Price: </span>
                               <span>{orderedSide.side_price}</span>
