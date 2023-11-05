@@ -15,13 +15,15 @@ export async function getOrderByUserId(user_id) {
   }
 }
 
-export async function createNewOrder({ user_id }) {
+export async function createNewOrder({ user_id, order_date, order_total }) {
   console.log("user_id from createNewOrder: ", user_id);
   try {
     const response = await axiosInstance.post(
       "/orders",
       {
         user_id,
+        order_date,
+        order_total,
       },
       {
         headers: {

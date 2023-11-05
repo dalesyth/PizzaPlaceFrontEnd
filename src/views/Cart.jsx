@@ -19,15 +19,37 @@ const Cart = () => {
   const handleCheckout = async () => {
     const user_id = auth.userId;
 
-    const [userOrder] = await getOrderByUserId(user_id);
+    // const [userOrder] = await getOrderByUserId(user_id);
 
-    if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
-      await createNewOrder({
-        user_id,
-      });
-    }
+    // if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
+    //   await createNewOrder({
+    //     user_id,
+    //   });
+    // }
+
+    const cartTotal = await getCartTotal();
+
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    let currentDate = `${month}-${day}-${year}`
+
+    console.log("current date: ", currentDate)
+
+    const userOrder = await createNewOrder({
+      user_id,
+      order_date: currentDate,
+      order_total: cartTotal,
+    });
+
+    
 
     console.log("cartItems from handleCheckout:", cartItems);
+
+    console.log("cartTotal from handleCheckout:", cartTotal);
 
     for (const cartItem of cartItems) {
       if (cartItem.pizza_id) {
