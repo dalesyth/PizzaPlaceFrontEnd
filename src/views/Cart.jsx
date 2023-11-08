@@ -84,8 +84,10 @@ const Cart = () => {
         await addSideToOrder({
           sideId: cartItem.side_option_id,
           orderId: userOrder.order_id,
+          sidePrice: cartItem.price,
         });
       }
+      
     }
   };
 

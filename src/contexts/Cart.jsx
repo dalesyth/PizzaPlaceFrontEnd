@@ -10,7 +10,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (item) => {
     
-    // console.log("item from addToCart:", item)
+    console.log("item from addToCart:", item)
     // console.log("item.title from addToCart:", item.title)
     
     const isItemInCart = cartItems.find((cartItem) => cartItem.title === item.title);

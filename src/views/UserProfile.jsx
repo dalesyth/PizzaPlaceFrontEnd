@@ -91,11 +91,11 @@ const UserProfile = () => {
         </span>
       </div>
       <div className="flex justify-between mt-8 bg-gray-200">
-        <span>
+        <span className="w-full">
           <p className="flex justify-center font-bold">Previous Orders:</p>
           <div>
             {orders.map((order, index) => (
-              <div key={index} className="shadow-lg mb-6 bg-white">
+              <div key={index} className="shadow-lg mb-6 bg-white w-">
                 <div>
                   <h2 className="order-heading">Ordered Pizza:</h2>
                   <div>

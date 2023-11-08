@@ -24,8 +24,14 @@ export async function getOrderedPizzaByOrderId(order_id) {
         "Content-Type": "application/json",
       },
     });
+
+    if (!response || response.length === 0) {
+      return null
+    } else {
+      return response.data;
+    }
     
-    return response.data;
+    
   } catch (error) {
     console.error("Error getting ordered pizza by orderId:", error)
     throw error;
@@ -120,13 +126,14 @@ export async function attachToppingsToOrderedPizza({ topping_id, pizza_id }) {
   return responses;
 }
 
-export async function addSideToOrder({ sideId, orderId }) {
+export async function addSideToOrder({ sideId, orderId, sidePrice }) {
   try {
     const response = await axiosInstance.patch(
       `/sides/${orderId}/add-side`,
       {
         sideId,
         orderId,
+        sidePrice,
       },
       {
         headers: {
