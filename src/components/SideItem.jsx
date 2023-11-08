@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import { CartContext } from "../contexts/Cart";
 
-const SideItem = ({ side, quantity, handleQuantity, handleAddSideToCart }) => {
-  const { cartItems, addToCart } = useContext(CartContext);
+const SideItem = ({ side }) => {
+  const { addToCart } = useContext(CartContext);
 
   return (
     <div className="border-black border-2 rounded-lg shadow-lg mb-2 p-2">
@@ -16,24 +16,10 @@ const SideItem = ({ side, quantity, handleQuantity, handleAddSideToCart }) => {
         <div className="flex-col">
           <span>
             <div>
-              {/* <label className="mr-2 text-xs lg:text-base" htmlFor="quantity">
-                Quantity:
-              </label>
-              <input
-                className="w-12 text-center text-xs lg:text-base"
-                type="number"
-                id="quantity"
-                value={quantity}
-                onChange={handleQuantity}
-              ></input> */}
+              
             </div>
             <div className="text-right">
-              {/* <button
-                className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
-                onClick={() => handleAddSideToCart(side.side_option_id)}
-              >
-                Add To Cart
-              </button> */}
+              
               <button
                 className="bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
                 onClick={() => addToCart(side)}
@@ -54,9 +40,7 @@ SideItem.propTypes = {
     price: PropTypes.string.isRequired,
     side_option_id: PropTypes.number.isRequired,
   }),
-  quantity: PropTypes.number.isRequired,
-  handleQuantity: PropTypes.func.isRequired,
-  handleAddSideToCart: PropTypes.func.isRequired,
+  
 };
 
 export default SideItem;

@@ -1,11 +1,15 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect } from 'react';
+import { useNavigate } from "react-router";
+
 
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
+  const navigate = useNavigate();
 
   const addToCart = (item) => {
+    
     // console.log("item from addToCart:", item)
     // console.log("item.title from addToCart:", item.title)
     
@@ -29,6 +33,7 @@ export const CartProvider = ({ children }) => {
         // console.log("isItemInCart is falsy")
       setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
+    navigate("/cart")
   };
 
   const removeFromCart = (item) => {

@@ -143,7 +143,7 @@ const Cart = () => {
           to="/order-page"
           className="main-title hover:border-b-4 hover.border-red-500"
         >
-          Continue Shopping
+          Continue Ordering
         </Link>
       </div>
       <div className="flex justify-center">
