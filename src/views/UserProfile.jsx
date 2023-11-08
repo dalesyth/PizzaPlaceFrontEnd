@@ -97,16 +97,17 @@ const UserProfile = () => {
             {orders.map((order, index) => (
               <div key={index} className="shadow-lg mb-6 bg-white w-">
                 <div>
-                  <h2 className="order-heading">Ordered Pizza:</h2>
+                  <div>
+                    <span className="font-bold">Order Date: </span>
+                    <span>{formatDate(order.order_date)}</span>
+                  </div>
                   <div>
                     {orderedPizzas[order.order_id] &&
                       orderedPizzas[order.order_id].map(
                         (orderedPizza, pizzaIndex) => (
                           <div key={pizzaIndex}>
-                            <div>
-                              <span className="font-bold">Order Date: </span>
-                              <span>{formatDate(order.order_date)}</span>
-                            </div>
+                            <h2 className="order-heading">Ordered Pizza:</h2>
+
                             <p>
                               <span className="font-bold">Price: </span>
                               <span>{orderedPizza.ordered_pizza_price}</span>
@@ -140,20 +141,20 @@ const UserProfile = () => {
                   </div>
                 </div>
                 <div>
-                  <h2 className="order-heading">Ordered Side:</h2>
                   <div>
                     {orderedSides[order.order_id] &&
                       orderedSides[order.order_id].map(
                         (orderedSide, sideIndex) => (
                           <div key={sideIndex}>
+                            <h2 className="order-heading">Ordered Side:</h2>
                             <p>
                               <span className="font-bold">Name: </span>
                               <span>{orderedSide.side_option_title}</span>
                             </p>
-                            
+
                             <p>
                               <span className="font-bold">Price: </span>
-                              <span>{orderedSide.side_price}</span>
+                              <span>{orderedSide.side_option_price}</span>
                             </p>
                           </div>
                         )

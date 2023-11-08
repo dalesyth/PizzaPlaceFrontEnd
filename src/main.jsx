@@ -13,6 +13,7 @@ import Register from "./views/Register";
 import BuildPizza from "./views/BuildPizza";
 import Logout from "./views/Logout";
 import UserProfile from "./views/UserProfile";
+import ProcessOrder from "./views/ProcessOrder";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "/user-profile",
         element: <UserProfile />,
+      },
+      {
+        path: "/process-order",
+        element: <ProcessOrder />,
       },
     ],
   },

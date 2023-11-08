@@ -8,88 +8,82 @@ import {
   attachToppingsToOrderedPizza,
   addSideToOrder,
 } from "../api/orders";
+
 import useAuth from "../hooks/useAuth";
 
 const Cart = () => {
   const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
     useContext(CartContext);
-
+  
   const { auth } = useAuth();
 
-  const handleCheckout = async () => {
-    const user_id = auth.userId;
+  // const handleCheckout = async () => {
+  //   const user_id = auth.userId;
 
-    // const [userOrder] = await getOrderByUserId(user_id);
+  //   const cartTotal = await getCartTotal();
 
-    // if (!userOrder || userOrder.length === 0 || userOrder.order_complete) {
-    //   await createNewOrder({
-    //     user_id,
-    //   });
-    // }
+  //   const date = new Date();
 
-    const cartTotal = await getCartTotal();
+  //   let day = date.getDate();
+  //   let month = date.getMonth() + 1;
+  //   let year = date.getFullYear();
 
-    const date = new Date();
+  //   let currentDate = `${month}-${day}-${year}`;
 
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
+  //   console.log("current date: ", currentDate);
 
-    let currentDate = `${month}-${day}-${year}`
+  //   const userOrder = await createNewOrder({
+  //     user_id,
+  //     order_date: currentDate,
+  //     order_total: cartTotal,
+  //   });
 
-    console.log("current date: ", currentDate)
+  //   console.log("cartItems from handleCheckout:", cartItems);
 
-    const userOrder = await createNewOrder({
-      user_id,
-      order_date: currentDate,
-      order_total: cartTotal,
-    });
+  //   console.log("cartTotal from handleCheckout:", cartTotal);
 
-    
+  //   for (const cartItem of cartItems) {
+  //     if (cartItem.pizza_id) {
+  //       try {
+  //         const orderedPizza = await addPizzaToOrder({
+  //           order_id: userOrder.order_id,
+  //           pizza_price: cartItem.price,
+  //           quantity: cartItem.quantity,
+  //           crust: cartItem.crustId,
+  //           sauce: cartItem.sauceId,
+  //         });
 
-    console.log("cartItems from handleCheckout:", cartItems);
+  //         const pizzaId = orderedPizza.ordered_pizza_id;
 
-    console.log("cartTotal from handleCheckout:", cartTotal);
+  //         if (Array.isArray(cartItem.toppings)) {
+  //           for (const topping of cartItem.toppings) {
+  //             await attachToppingsToOrderedPizza({
+  //               topping_id: topping.toppingId,
+  //               pizza_id: pizzaId,
+  //             });
+  //           }
+  //         } else {
+  //           await attachToppingsToOrderedPizza({
+  //             topping_id: cartItem.toppings,
+  //             pizza_id: pizzaId,
+  //           });
+  //         }
+  //       } catch (error) {
+  //         console.error(error);
+  //       }
+  //     } else if (cartItem.side_option_id) {
+  //       await addSideToOrder({
+  //         sideId: cartItem.side_option_id,
+  //         orderId: userOrder.order_id,
+  //         sidePrice: cartItem.price,
+  //       });
+  //     }
+  //   }
 
-    for (const cartItem of cartItems) {
-      if (cartItem.pizza_id) {
-        try {
-          const orderedPizza = await addPizzaToOrder({
-            order_id: userOrder.order_id,
-            pizza_price: cartItem.price,
-            quantity: cartItem.quantity,
-            crust: cartItem.crustId,
-            sauce: cartItem.sauceId,
-          });
+  //   clearCart();
+  // };
 
-          const pizzaId = orderedPizza.ordered_pizza_id;
-
-          if (Array.isArray(cartItem.toppings)) {
-            for (const topping of cartItem.toppings) {
-              await attachToppingsToOrderedPizza({
-                topping_id: topping.toppingId,
-                pizza_id: pizzaId,
-              });
-            }
-          } else {
-            await attachToppingsToOrderedPizza({
-              topping_id: cartItem.toppings,
-              pizza_id: pizzaId,
-            });
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      } else if (cartItem.side_option_id) {
-        await addSideToOrder({
-          sideId: cartItem.side_option_id,
-          orderId: userOrder.order_id,
-          sidePrice: cartItem.price,
-        });
-      }
-      
-    }
-  };
+  
 
   return (
     <>
@@ -149,12 +143,19 @@ const Cart = () => {
         </Link>
       </div>
       <div className="flex justify-center">
-        <button
+        {/* <button
           className="w-1/4 mt-6 bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
           onClick={() => handleCheckout(cartItems)}
         >
           Checkout
-        </button>
+        </button> */}
+        <Link
+          className="flex justify-center w-1/4 mt-6 bg-blue-400 text-white text-xs lg:text-base font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
+          to="/process-order"
+          id="process-order"
+        >
+          Submit Order
+        </Link>
       </div>
     </>
   );
