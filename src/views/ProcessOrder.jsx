@@ -7,6 +7,7 @@ import {
   attachToppingsToOrderedPizza,
   addSideToOrder,
 } from "../api/orders";
+import { guestUser } from "../api/users";
 import useAuth from "../hooks/useAuth";
 
 const ProcessOrder = () => {
@@ -14,7 +15,6 @@ const ProcessOrder = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [userId, setUserId] = useState(null);
 
   const { auth } = useAuth();
 
@@ -42,11 +42,17 @@ const ProcessOrder = () => {
   console.log("email:", email);
 
   const handleSubmitOrder = async () => {
+    let userId;
 
     if (auth.token) {
-      setUserId(auth.user_id)
+      console.log("auth.token is truthy");
+      console.log("auth.userId from if stmt:", auth.userId);
+      userId = auth.userId;
     } else {
-      
+      console.log("auth.token is falsy");
+      const user = await guestUser(firstName, lastName, email);
+      console.log("user from else stmt:", user)
+      userId = user.user_id;
     }
 
     // const user_id = auth.userId;
@@ -63,8 +69,10 @@ const ProcessOrder = () => {
 
     console.log("current date: ", currentDate);
 
+    console.log("userId from handleSubmitOrder:", userId);
+
     const userOrder = await createNewOrder({
-      user_id,
+      user_id: userId,
       order_date: currentDate,
       order_total: cartTotal,
     });
