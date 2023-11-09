@@ -1,5 +1,19 @@
 import axiosInstance from "./axios";
 
+export const guestUser = async (firstName, lastName, email) => {
+  try {
+    const response = await axiosInstance.post("/users/guest", {
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+    });
+    console.log("response.data from guestUser function:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating guest user:", error);
+  }
+};
+
 export const registerUser = async (firstName, lastName, email, password) => {
   try {
     const response = await axiosInstance.post("/users/register", {
@@ -16,16 +30,16 @@ export const registerUser = async (firstName, lastName, email, password) => {
 };
 
 export const loginUser = async (email, password) => {
-    console.log("email from loginUser: ", email)
-    console.log("password from loginUser: ", password)
-    try {
-        const response = await axiosInstance.post("/users/login", {
-            email: email,
-            password: password,
-        });
-        console.log("response.data from loginUser function: ", response.data);
-        return response.data;
-    } catch (error) {
-        console.error("Error logging in user: ", error)
-    }
-}
+  console.log("email from loginUser: ", email);
+  console.log("password from loginUser: ", password);
+  try {
+    const response = await axiosInstance.post("/users/login", {
+      email: email,
+      password: password,
+    });
+    console.log("response.data from loginUser function: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error logging in user: ", error);
+  }
+};

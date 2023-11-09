@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../contexts/Cart";
 import { Link } from "react-router-dom";
 import {
@@ -10,13 +10,46 @@ import {
 import useAuth from "../hooks/useAuth";
 
 const ProcessOrder = () => {
-  const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
-    useContext(CartContext);
+  const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState(null);
 
   const { auth } = useAuth();
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+  };
+
+  const handleFirstName = (event) => {
+    setFirstName(event.target.value);
+  };
+
+  const handleLastName = (event) => {
+    setLastName(event.target.value);
+  };
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
+  console.log("firstName:", firstName);
+  console.log("lastName:", lastName);
+  console.log("email:", email);
+
   const handleSubmitOrder = async () => {
-    const user_id = auth.userId;
+
+    if (auth.token) {
+      setUserId(auth.user_id)
+    } else {
+      
+    }
+
+    // const user_id = auth.userId;
 
     const cartTotal = await getCartTotal();
 
@@ -81,7 +114,90 @@ const ProcessOrder = () => {
     clearCart();
   };
 
-  return <div>ProcessOrder</div>;
+  console.log("auth from ProcessOrder:", auth);
+
+  {
+    auth?.token ? console.log("registered user") : console.log("guest user");
+  }
+
+  return (
+    <>
+      <div className="bg-gray-500/50 fixed top-0 left-0 w-full h-screen">
+        <div className="flex justify-center items-center py-24">
+          <div className="mx-auto max-w-[450px] h-100 rounded-lg bg-gray-200">
+            <div className="font-bold max-w-[320px] mx-auto py-6 px-3">
+              {auth?.token ? (
+                <>
+                  <div className="text-center mb-6">
+                    <h1 className="text-xl">
+                      Please confirm your information, and submit order
+                    </h1>
+                  </div>
+                  <div>
+                    <p>
+                      Name: {auth.firstName} {auth.lastName}
+                    </p>
+                  </div>
+                  <div>
+                    <p>Email: {auth.email}</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h1 className="mb-2">
+                    Please enter the following information to submit your order:
+                  </h1>
+                  <form className="text-center mb-6" onSubmit={handleSubmit}>
+                    <input
+                      className="p-1 mb-2 w-full"
+                      type="text"
+                      value={firstName}
+                      onChange={handleFirstName}
+                      placeholder="First Name"
+                      required
+                    />
+
+                    <input
+                      className="p-1 mb-2 w-full"
+                      type="text"
+                      value={lastName}
+                      onChange={handleLastName}
+                      placeholder="Last Name"
+                      required
+                    />
+
+                    <input
+                      className="p-1 w-full"
+                      type="text"
+                      value={email}
+                      onChange={handleEmail}
+                      placeholder="Email"
+                      required
+                    />
+                  </form>
+                </>
+              )}
+
+              <div className="flex flex-col text-center mt-6">
+                <div>
+                  <button
+                    className="w-1/4 mb-2 bg-blue-400 text-white font-bold px-0.5 py-1 mt-2 rounded-lg hover:bg-blue-600 hover:font-extrabold"
+                    onClick={handleSubmitOrder}
+                  >
+                    Submit
+                  </button>
+                </div>
+
+                <Link to={`/cart`} className="float-right hover:text-blue-600">
+                  Return to Cart
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default ProcessOrder;
