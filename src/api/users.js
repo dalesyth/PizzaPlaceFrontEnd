@@ -1,5 +1,19 @@
 import axiosInstance from "./axios";
 
+export async function getAllUsers() {
+  try {
+    const response = await axiosInstance.get("/users", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("response.data from getAllUsers api call:", response.data)
+    return response.data;
+  } catch (error) {
+    console.error("Error getting all users:", error)
+  }
+}
+
 export const guestUser = async (firstName, lastName, email) => {
   try {
     const response = await axiosInstance.post("/users/guest", {

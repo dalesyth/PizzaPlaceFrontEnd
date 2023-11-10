@@ -1,5 +1,19 @@
 import axiosInstance from "./axios";
 
+export async function getAllOrders() {
+  try {
+    const response = await axiosInstance.get('/orders', {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("response.data from getAllOrders api call:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting all orders:", error)
+  }
+}
+
 export async function getOrderByUserId(user_id) {
   
   try {

@@ -13,6 +13,18 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  {
+    auth?.token
+      ? console.log("user is logged in")
+      : console.log("user is not logged in");
+  }
+
+  {
+    auth?.admin
+      ? console.log("user is an admin")
+      : console.log("user is not an admin");
+  }
+
   return (
     <header className="py-4 px-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
@@ -24,6 +36,13 @@ const Header = () => {
           >
             The Pizza Place
           </Link>
+        </div>
+        <div>
+          {auth?.admin ? (
+            <Link to="/admin" id="admin">
+              Admin
+            </Link>
+          ) : null}
         </div>
         <div className="flex items-center space-x-4">
           {/* Hamburger menu button */}
