@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../contexts/Cart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   createNewOrder,
   addPizzaToOrder,
@@ -15,6 +15,8 @@ const ProcessOrder = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
 
   const { auth } = useAuth();
 
@@ -51,7 +53,7 @@ const ProcessOrder = () => {
     } else {
       console.log("auth.token is falsy");
       const user = await guestUser(firstName, lastName, email);
-      console.log("user from else stmt:", user)
+      console.log("user from else stmt:", user);
       userId = user.user_id;
     }
 
@@ -120,6 +122,7 @@ const ProcessOrder = () => {
     }
 
     clearCart();
+    navigate("/cart");
   };
 
   console.log("auth from ProcessOrder:", auth);
