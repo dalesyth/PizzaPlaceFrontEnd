@@ -77,6 +77,11 @@ ul.leaders span + span {
   background: whitesmoke;
 }
 
+.table-with-spacing th,
+.table-with-spacing td {
+  padding: 10px;
+}
+
 @media (max-width: 768px) {
   .link-button {
     font-size: 0.75rem;

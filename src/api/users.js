@@ -1,4 +1,7 @@
 import axiosInstance from "./axios";
+import useAuth from "../hooks/useAuth";
+
+
 
 export async function getAllUsers() {
   try {
@@ -57,3 +60,20 @@ export const loginUser = async (email, password) => {
     console.error("Error logging in user: ", error);
   }
 };
+
+export const deleteUser = async ({ userId, token }) => {
+  
+
+
+  try {
+    const response = await axiosInstance.delete(`/users/delete/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting user:", error)
+  }
+}

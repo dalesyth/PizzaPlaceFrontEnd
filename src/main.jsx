@@ -15,6 +15,8 @@ import Logout from "./views/Logout";
 import UserProfile from "./views/UserProfile";
 import ProcessOrder from "./views/ProcessOrder";
 import Admin from "./views/Admin";
+import Users from "./admin/Users";
+import Orders from "./admin/Orders";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +67,14 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <Admin />,
+      },
+      {
+        path: "/admin/users",
+        element: <Users />,
+      },
+      {
+        path: "/admin/orders",
+        element: <Orders />,
       },
     ],
   },

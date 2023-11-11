@@ -16,21 +16,27 @@ const OrderPage = () => {
 
   return (
     <>
-      <p className="pizzas-heading">Pizzas</p>
-      <div className="flex justify-center">
-        <Link to="/build-pizza" className="link-button mb-2">
-          Build Your Own Pizza
-        </Link>
-      </div>
-      <div>
-        {pizzas.map((pizza, pizzaIndex) => (
-          <PizzaItem key={pizzaIndex} pizza={pizza} />
-        ))}
-        <p className="sides-heading">Sides</p>
-        {sides.map((side, index) => (
-          <SideItem key={index} side={side} />
-        ))}
-      </div>
+      {isLoadingPizzas || isLoadingSides ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <p className="pizzas-heading">Pizzas</p>
+          <div className="flex justify-center">
+            <Link to="/build-pizza" className="link-button mb-2">
+              Create Your Own Pizza
+            </Link>
+          </div>
+          <div>
+            {pizzas.map((pizza, pizzaIndex) => (
+              <PizzaItem key={pizzaIndex} pizza={pizza} />
+            ))}
+            <p className="sides-heading">Sides</p>
+            {sides.map((side, index) => (
+              <SideItem key={index} side={side} />
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 };

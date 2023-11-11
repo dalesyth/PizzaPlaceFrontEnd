@@ -17,6 +17,8 @@ const Cart = () => {
   
   const { auth } = useAuth();
 
+  console.log("auth from cart:", auth)
+
   // const handleCheckout = async () => {
   //   const user_id = auth.userId;
 

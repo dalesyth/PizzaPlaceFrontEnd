@@ -39,7 +39,7 @@ const Header = () => {
         </div>
         <div>
           {auth?.admin ? (
-            <Link to="/admin" id="admin">
+            <Link to="/admin" id="admin" className="hover:font-bold hover:underline">
               Admin
             </Link>
           ) : null}

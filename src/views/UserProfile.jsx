@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getOrderByUserId, getOrderedPizzaByOrderId } from "../api/orders";
 import { getOrderedSidesByOrderId } from "../api/sides";
+import FormatDate from "../components/FormatDate";
 import useAuth from "../hooks/useAuth";
 
 const UserProfile = () => {
@@ -60,11 +61,6 @@ const UserProfile = () => {
     loadOrderedPizzasAndSides();
   }, [orders]);
 
-  function formatDate(dateString) {
-    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  }
-
   console.log("orders from UserProfile:", orders);
   console.log("orderedPizzas from UserProfile:", orderedPizzas);
   console.log("orderedSides from UserProfile:", orderedSides);
@@ -99,7 +95,9 @@ const UserProfile = () => {
                 <div>
                   <div>
                     <span className="font-bold">Order Date: </span>
-                    <span>{formatDate(order.order_date)}</span>
+                    <span>
+                      <FormatDate dateString={order.order_date} />
+                    </span>
                   </div>
                   <div>
                     {orderedPizzas[order.order_id] &&
