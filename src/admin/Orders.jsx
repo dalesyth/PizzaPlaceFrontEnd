@@ -1,13 +1,19 @@
-import { getAllOrders } from "../api/orders";
+import { getAllOrders, deleteOrder } from "../api/orders";
 import { useFetchData } from "../hooks/useFetchData";
 import FormatDate from "../components/FormatDate";
 
 const Orders = () => {
-  const { data: orders, isLoading: isLoadingOrders } =
+  const { data: orders, isLoading: isLoadingOrders, error, refetch } =
     useFetchData(getAllOrders);
 
   const handleDeleteOrder = async (orderId) => {
-    
+    try {
+      await deleteOrder(orderId);
+
+      refetch();
+    } catch (error) {
+      console.error("Error deleting order:", error);
+    }
   }
 
   console.log("orders from Orders component:", orders);
@@ -20,6 +26,8 @@ const Orders = () => {
 
       {isLoadingOrders ? (
         <p>Loading...</p>
+      ) : error ? (
+        <p>Error loading orders: {error.message}</p>
       ) : (
         <table className="table-auto table-with-spacing">
           <thead>

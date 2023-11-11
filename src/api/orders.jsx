@@ -163,7 +163,8 @@ export async function addSideToOrder({ sideId, orderId, sidePrice }) {
   }
 }
 
-export const deleteOrder = async ({ orderId }) => {
+export const deleteOrder = async (orderId) => {
+  console.log("orderId from deleteOrder API call:", orderId)
   try {
     const response = await axiosInstance.delete(`/orders/delete/${orderId}`, {
       headers: {
