@@ -162,3 +162,17 @@ export async function addSideToOrder({ sideId, orderId, sidePrice }) {
     throw error;
   }
 }
+
+export const deleteOrder = async ({ orderId }) => {
+  try {
+    const response = await axiosInstance.delete(`/orders/delete/${orderId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting order:", error)
+  }
+}

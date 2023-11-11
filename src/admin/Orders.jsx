@@ -6,6 +6,10 @@ const Orders = () => {
   const { data: orders, isLoading: isLoadingOrders } =
     useFetchData(getAllOrders);
 
+  const handleDeleteOrder = async (orderId) => {
+    
+  }
+
   console.log("orders from Orders component:", orders);
 
   return (
@@ -36,7 +40,12 @@ const Orders = () => {
                     <FormatDate dateString={order.order_date} />
                   </td>
                   <td>
-                    <button>Delete</button>
+                    <button
+                      className="h-10 bg-blue-400 text-white font-bold px-1 py-1 rounded-lg hover:bg-blue-600 hover:font-extrabold shadow-lg"
+                      onClick={() => handleDeleteOrder(order.order_id)}
+                    >
+                      DELETE
+                    </button>
                   </td>
                 </tr>
               ))
