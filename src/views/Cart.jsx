@@ -19,6 +19,8 @@ const Cart = () => {
 
   console.log("auth from cart:", auth)
 
+  console.log("cartItems from cart:", cartItems)
+
   // const handleCheckout = async () => {
   //   const user_id = auth.userId;
 
