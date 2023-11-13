@@ -12,6 +12,7 @@ import {
 import useAuth from "../hooks/useAuth";
 
 const Cart = () => {
+ 
   const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
     useContext(CartContext);
   
@@ -94,8 +95,8 @@ const Cart = () => {
       <div className="flex-col flex items-center bg-white gap-8 p-10 text-black text-sm">
         <h1 className="text-2xl font-bold">Cart</h1>
         <div className="flex flex-col gap-4">
-          {cartItems.map((item) => (
-            <div className="flex justify-between items-center" key={item.id}>
+          {cartItems.map((item, itemIndex) => (
+            <div className="flex justify-between items-center" key={itemIndex}>
               <div className="flex gap-4">
                 <div className="flex flex-col mr-8">
                   <h1 className="text-lg font-bold">{item.title}</h1>

@@ -7,7 +7,9 @@ import MenuItemList from "../components/MenuItemsList";
 import SideItemList from "../components/SideItemsList";
 import OrderButton from "../components/OrderButton";
 
+
 const Menu = () => {
+ 
   const { data: toppings, isLoading: isLoadingToppings } =
     useFetchData(getAllToppings);
   const { data: sauces, isLoading: isLoadingSauces } =

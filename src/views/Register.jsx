@@ -2,9 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { registerUser } from "../api/users";
 
-import React from "react";
 
 const Register = () => {
+  
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,22 +35,33 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if(!email || !password) {
-        setError("Please fill out all fields!")
+    if (!email || !password) {
+      setError("Please fill out all fields!");
+      return;
     }
 
     if (password.length < 8) {
-        setError("Password must be at least 8 characters!")
+      setError("Password must be at least 8 characters!");
+      return;
     }
 
     try {
-        const user = await registerUser(firstName, lastName, email, password);
-        console.log("user from handleSubmit in register: ", user);
+      const response = await registerUser(firstName, lastName, email, password);
+
+      // Assuming your server sends a token in the response
+      const token = response.token;
+
+      // Set the token as a cookie
+      document.cookie = `token=${token}; Path=/; SameSite=Strict`;
+
+      // Redirect to the home page or any other page you want
+      navigate("/home");
     } catch (error) {
-        console.error;
-        setError(error);
+      console.error(error);
+      setError(error.message || "Registration failed");
     }
-  }
+  };
+
 
   return (
     <>

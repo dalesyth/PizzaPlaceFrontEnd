@@ -10,7 +10,9 @@ import {
 import { guestUser } from "../api/users";
 import useAuth from "../hooks/useAuth";
 
+
 const ProcessOrder = () => {
+ 
   const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -18,7 +20,7 @@ const ProcessOrder = () => {
 
   const navigate = useNavigate();
 
-  const { auth } = useAuth();
+  const { auth, isLoggedIn } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,8 +48,8 @@ const ProcessOrder = () => {
   const handleSubmitOrder = async () => {
     let userId;
 
-    if (auth.token) {
-      console.log("auth.token is truthy");
+    if (isLoggedIn) {
+      console.log("isLoggedIn from submit order is truthy");
       console.log("auth.userId from if stmt:", auth.userId);
       userId = auth.userId;
     } else {
@@ -128,7 +130,7 @@ const ProcessOrder = () => {
   console.log("auth from ProcessOrder:", auth);
 
   {
-    auth?.token ? console.log("registered user") : console.log("guest user");
+    isLoggedIn ? console.log("registered user") : console.log("guest user");
   }
 
   return (
@@ -137,7 +139,7 @@ const ProcessOrder = () => {
         <div className="flex justify-center items-center py-24">
           <div className="mx-auto max-w-[450px] h-100 rounded-lg bg-gray-200">
             <div className="font-bold max-w-[320px] mx-auto py-6 px-3">
-              {auth?.token ? (
+              {isLoggedIn ? (
                 <>
                   <div className="text-center mb-6">
                     <h1 className="text-xl">

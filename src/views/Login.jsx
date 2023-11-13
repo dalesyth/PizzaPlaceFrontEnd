@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/users";
 import useAuth from "../hooks/useAuth";
 
@@ -7,13 +7,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
   const { setAuth } = useAuth();
-
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/home";
 
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -29,18 +24,17 @@ const Login = () => {
     try {
       const response = await loginUser(email, password);
 
-      
-
       const firstName = response.user.first_name;
       const lastName = response.user.last_name;
       const userId = response.user.user_id;
       const admin = response.user.is_admin;
 
-      const token = response.token;
-      setAuth({ userId, firstName, lastName, email, token, admin });
+      // Token is now stored as a cookie
+      // No need to handle it in state
+      setAuth({ userId, firstName, lastName, email, admin });
+
       setEmail("");
       setPassword("");
-      // navigate(from, { replace: true });
       navigate("/home");
     } catch (error) {
       console.error(error);
@@ -95,7 +89,6 @@ const Login = () => {
           </Link>
         </form>
         {error && <p className="text-red-500">{error}</p>}
-        {success && <p className="text-blue-500">{success}</p>}
       </div>
     </div>
   );

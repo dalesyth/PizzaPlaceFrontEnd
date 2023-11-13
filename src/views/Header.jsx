@@ -7,14 +7,14 @@ import useAuth from "../hooks/useAuth";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { auth } = useAuth();
+  const { auth, isLoggedIn } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   {
-    auth?.token
+    isLoggedIn()
       ? console.log("user is logged in")
       : console.log("user is not logged in");
   }
@@ -66,7 +66,7 @@ const Header = () => {
                   Menu
                 </Link>
               </li>
-              {auth?.token ? (
+              {isLoggedIn() ? (
                 <li>
                   <Link to="/user-profile" id="profile" onClick={toggleMenu}>
                     Profile

@@ -5,11 +5,14 @@ import PizzaItem from "../components/PizzaItem";
 import SideItem from "../components/SideItem";
 import { useFetchData } from "../hooks/useFetchData";
 
+
 const OrderPage = () => {
+ 
   const { data: pizzas, isLoading: isLoadingPizzas } = useFetchData(
     getAllSpecialtyPizzas
   );
   const { data: sides, isLoading: isLoadingSides } = useFetchData(getAllSides);
+  
 
   console.log("pizzas:", pizzas);
   console.log("sides:", sides);

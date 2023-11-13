@@ -66,7 +66,7 @@ export const deleteUser = async ({ userId, token }) => {
 
 
   try {
-    const response = await axiosInstance.delete(`/users/delete/${userId}`, {
+    const response = await axiosInstance.delete(`/users/${userId}/delete`, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
@@ -77,3 +77,27 @@ export const deleteUser = async ({ userId, token }) => {
     console.error("Error deleting user:", error)
   }
 }
+
+export const logoutUser = async () => {
+  try {
+    const response = await axiosInstance.get("/users/logout", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    // Handle the response data here
+    console.log("Logout response:", response.data);
+
+    // You can return the response data if needed
+    return response.data;
+  } catch (error) {
+    console.error("Error logging out user:", error);
+
+    // Handle errors if needed
+    throw error;
+  }
+};
+
+
+
