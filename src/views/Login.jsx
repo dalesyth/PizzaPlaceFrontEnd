@@ -24,6 +24,8 @@ const Login = () => {
     try {
       const response = await loginUser(email, password);
 
+      console.log("response from Login:", response)
+
       const firstName = response.user.first_name;
       const lastName = response.user.last_name;
       const userId = response.user.user_id;

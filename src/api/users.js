@@ -61,7 +61,7 @@ export const loginUser = async (email, password) => {
   }
 };
 
-export const deleteUser = async ({ userId, token }) => {
+export const deleteUser = async ({ userId }) => {
   
 
 
@@ -69,7 +69,7 @@ export const deleteUser = async ({ userId, token }) => {
     const response = await axiosInstance.delete(`/users/${userId}/delete`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        
       },
     });
     return response.data;
