@@ -13,16 +13,19 @@ export const useStaticData = () => {
 };
 
 const StaticDataProvider = ({ children }) => {
-  const { data: toppings, isLoading: isLoadingToppings } =
+    
+  const { data: toppings, isLoading: isLoadingToppings, error: toppingError } =
     useFetchData(getAllToppings);
-  const { data: sauces, isLoading: isLoadingSauces } =
+  const { data: sauces, isLoading: isLoadingSauces, error: sauceError } =
     useFetchData(getAllSauces);
-  const { data: crusts, isLoading: isLoadingCrusts } =
+  const { data: crusts, isLoading: isLoadingCrusts, error: crustError } =
     useFetchData(getAllCrusts);
-  const { data: sides, isLoading: isLoadingSides } = useFetchData(getAllSides);
-  const { data: pizzas, isLoading: isLoadingPizzas } = useFetchData(
+  const { data: sides, isLoading: isLoadingSides, error: sideError } = useFetchData(getAllSides);
+  const { data: pizzas, isLoading: isLoadingPizzas, error: pizzaError } = useFetchData(
     getAllSpecialtyPizzas
   );
+
+
 
   const values = {
     crusts,
@@ -35,6 +38,11 @@ const StaticDataProvider = ({ children }) => {
     isLoadingCrusts,
     isLoadingSides,
     isLoadingPizzas,
+    crustError,
+    sauceError,
+    toppingError,
+    sideError,
+    pizzaError,
   };
 
   return (

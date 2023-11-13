@@ -1,29 +1,21 @@
 import { useState } from "react";
-import { getAllCrusts } from "../api/crusts";
-import { getAllSauces } from "../api/sauces";
-import { getAllToppings } from "../api/toppings";
-import { useFetchData } from "../hooks/useFetchData";
 import { useContext } from "react";
 import { CartContext } from "../contexts/Cart";
-
+import { useStaticData } from "../contexts/StaticDataProvider";
 
 const BuildPizza = () => {
-  
   const {
-    data: crusts,
-    isLoading: isLoadingCrusts,
-    error: crustError,
-  } = useFetchData(getAllCrusts);
-  const {
-    data: sauces,
-    isLoading: isLoadingSauces,
-    error: sauceError,
-  } = useFetchData(getAllSauces);
-  const {
-    data: toppings,
-    isLoading: isLoadingToppings,
-    error: toppingError,
-  } = useFetchData(getAllToppings);
+    crusts,
+    sauces,
+    toppings,
+    isLoadingToppings,
+    isLoadingSauces,
+    isLoadingCrusts,
+    crustError,
+    sauceError,
+    toppingError,
+  } = useStaticData();
+
   const { addtoCart } = useContext(CartContext);
 
   const [selectedCrust, setSelectedCrust] = useState(null);
@@ -46,11 +38,9 @@ const BuildPizza = () => {
     console.log("Selected Crust:", selectedCrust);
     console.log("Selected Sauce:", selectedSauce);
     console.log("Selected Toppings:", selectedToppings);
-  }
 
-  console.log("crusts from BuildPizza:", crusts);
-  console.log("sauces from BuildPizza:", sauces);
-  console.log("toppings from BuildPizza:", toppings);
+    
+  };
 
   return (
     <>
@@ -148,7 +138,6 @@ const BuildPizza = () => {
           Add to Cart
         </button>
       </div>
-      
     </>
   );
 };
