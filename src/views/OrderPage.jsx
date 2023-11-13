@@ -1,18 +1,10 @@
 import { Link } from "react-router-dom";
-import { getAllSpecialtyPizzas } from "../api/specialtypizzas";
-import { getAllSides } from "../api/sides";
 import PizzaItem from "../components/PizzaItem";
 import SideItem from "../components/SideItem";
-import { useFetchData } from "../hooks/useFetchData";
-
+import { useStaticData } from "../contexts/StaticDataProvider";
 
 const OrderPage = () => {
- 
-  const { data: pizzas, isLoading: isLoadingPizzas } = useFetchData(
-    getAllSpecialtyPizzas
-  );
-  const { data: sides, isLoading: isLoadingSides } = useFetchData(getAllSides);
-  
+  const { pizzas, sides, isLoadingPizzas, isLoadingSides } = useStaticData();
 
   console.log("pizzas:", pizzas);
   console.log("sides:", sides);

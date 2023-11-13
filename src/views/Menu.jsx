@@ -1,22 +1,19 @@
-import { useFetchData } from "../hooks/useFetchData";
-import { getAllToppings } from "../api/toppings";
-import { getAllSauces } from "../api/sauces";
-import { getAllCrusts } from "../api/crusts";
-import { getAllSides } from "../api/sides";
+import { useStaticData } from "../contexts/StaticDataProvider";
 import MenuItemList from "../components/MenuItemsList";
 import SideItemList from "../components/SideItemsList";
 import OrderButton from "../components/OrderButton";
 
-
 const Menu = () => {
- 
-  const { data: toppings, isLoading: isLoadingToppings } =
-    useFetchData(getAllToppings);
-  const { data: sauces, isLoading: isLoadingSauces } =
-    useFetchData(getAllSauces);
-  const { data: crusts, isLoading: isLoadingCrusts } =
-    useFetchData(getAllCrusts);
-  const { data: sides, isLoading: isLoadingSides } = useFetchData(getAllSides)
+  const {
+    crusts,
+    sauces,
+    toppings,
+    sides,
+    isLoadingToppings,
+    isLoadingSauces,
+    isLoadingCrusts,
+    isLoadingSides,
+  } = useStaticData();
 
   return (
     <>
@@ -49,7 +46,10 @@ const Menu = () => {
         {!isLoadingSides && (
           <SideItemList
             title="Side Orders"
-            items={sides.map((side) => ({ title: side.title, price: side.price }))}
+            items={sides.map((side) => ({
+              title: side.title,
+              price: side.price,
+            }))}
           />
         )}
       </div>

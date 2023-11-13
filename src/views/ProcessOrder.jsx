@@ -29,16 +29,10 @@ const ProcessOrder = () => {
     setEmail("");
   };
 
-  const handleFirstName = (event) => {
-    setFirstName(event.target.value);
-  };
+  
 
-  const handleLastName = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
+  const handleInput = (event, setterFunction) => {
+    setterFunction(event.target.value);
   };
 
   console.log("firstName:", firstName);
@@ -48,14 +42,14 @@ const ProcessOrder = () => {
   const handleSubmitOrder = async () => {
     let userId;
 
-    if (isLoggedIn) {
+    if (isLoggedIn()) {
       console.log("isLoggedIn from submit order is truthy");
       console.log("auth.userId from if stmt:", auth.userId);
       userId = auth.userId;
     } else {
       console.log("auth.token is falsy");
       const user = await guestUser(firstName, lastName, email);
-      console.log("user from else stmt:", user);
+      console.log("user from guestUser:", user);
       userId = user.user_id;
     }
 
@@ -64,11 +58,9 @@ const ProcessOrder = () => {
     const cartTotal = await getCartTotal();
 
     const date = new Date();
-
     let day = date.getDate();
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
-
     let currentDate = `${month}-${day}-${year}`;
 
     console.log("current date: ", currentDate);
@@ -130,7 +122,7 @@ const ProcessOrder = () => {
   console.log("auth from ProcessOrder:", auth);
 
   {
-    isLoggedIn ? console.log("registered user") : console.log("guest user");
+    isLoggedIn() ? console.log("registered user") : console.log("guest user");
   }
 
   return (
@@ -139,7 +131,7 @@ const ProcessOrder = () => {
         <div className="flex justify-center items-center py-24">
           <div className="mx-auto max-w-[450px] h-100 rounded-lg bg-gray-200">
             <div className="font-bold max-w-[320px] mx-auto py-6 px-3">
-              {isLoggedIn ? (
+              {isLoggedIn() ? (
                 <>
                   <div className="text-center mb-6">
                     <h1 className="text-xl">
@@ -165,7 +157,8 @@ const ProcessOrder = () => {
                       className="p-1 mb-2 w-full"
                       type="text"
                       value={firstName}
-                      onChange={handleFirstName}
+                      // onChange={handleFirstName}
+                      onChange={(event) => handleInput(event, setFirstName)}
                       placeholder="First Name"
                       required
                     />
@@ -174,7 +167,8 @@ const ProcessOrder = () => {
                       className="p-1 mb-2 w-full"
                       type="text"
                       value={lastName}
-                      onChange={handleLastName}
+                      // onChange={handleLastName}
+                      onChange={(event) => handleInput(event, setLastName)}
                       placeholder="Last Name"
                       required
                     />
@@ -183,7 +177,8 @@ const ProcessOrder = () => {
                       className="p-1 w-full"
                       type="text"
                       value={email}
-                      onChange={handleEmail}
+                      // onChange={handleEmail}
+                      onChange={(event) => handleInput(event, setEmail)}
                       placeholder="Email"
                       required
                     />
