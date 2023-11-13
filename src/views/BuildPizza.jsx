@@ -39,7 +39,24 @@ const BuildPizza = () => {
     console.log("Selected Sauce:", selectedSauce);
     console.log("Selected Toppings:", selectedToppings);
 
-    
+    if (selectedCrust && selectedSauce) {
+      const pizza = {
+        title: "Custom Pizza",
+        price: 16.99,
+        crustId: selectedCrust,
+        sauceId: selectedSauce,
+        toppings: selectedToppings,
+        quantity: 1,
+      };
+
+      addtoCart(pizza);
+
+      setSelectedCrust(null);
+      setSelectedSauce(null);
+      setSelectedToppings([]);
+    } else {
+      console.error("Crust and sauce are required");
+    }
   };
 
   return (
