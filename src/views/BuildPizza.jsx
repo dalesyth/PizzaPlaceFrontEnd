@@ -16,7 +16,7 @@ const BuildPizza = () => {
     toppingError,
   } = useStaticData();
 
-  const { addtoCart } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
 
   const [selectedCrust, setSelectedCrust] = useState(null);
   const [selectedSauce, setSelectedSauce] = useState(null);
@@ -49,7 +49,9 @@ const BuildPizza = () => {
         quantity: 1,
       };
 
-      addtoCart(pizza);
+      console.log("pizza from handleAddToCart:", pizza)
+
+      addToCart(pizza);
 
       setSelectedCrust(null);
       setSelectedSauce(null);

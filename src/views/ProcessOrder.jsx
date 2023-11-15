@@ -10,9 +10,7 @@ import {
 import { guestUser } from "../api/users";
 import useAuth from "../hooks/useAuth";
 
-
 const ProcessOrder = () => {
- 
   const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -28,8 +26,6 @@ const ProcessOrder = () => {
     setLastName("");
     setEmail("");
   };
-
-  
 
   const handleInput = (event, setterFunction) => {
     setterFunction(event.target.value);
@@ -78,7 +74,7 @@ const ProcessOrder = () => {
     console.log("cartTotal from handleCheckout:", cartTotal);
 
     for (const cartItem of cartItems) {
-      if (cartItem.pizza_id) {
+      if (cartItem.pizza_id || cartItem.title === "Custom Pizza") {
         try {
           const orderedPizza = await addPizzaToOrder({
             order_id: userOrder.order_id,
