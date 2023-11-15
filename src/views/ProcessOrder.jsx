@@ -88,12 +88,15 @@ const ProcessOrder = () => {
 
           if (Array.isArray(cartItem.toppings)) {
             for (const topping of cartItem.toppings) {
+              const toppingId =
+                typeof topping === "object" ? topping.toppingId : topping;
               await attachToppingsToOrderedPizza({
-                topping_id: topping.toppingId,
+                topping_id: toppingId,
                 pizza_id: pizzaId,
               });
             }
           } else {
+            // Assuming toppings is just an array of IDs
             await attachToppingsToOrderedPizza({
               topping_id: cartItem.toppings,
               pizza_id: pizzaId,
