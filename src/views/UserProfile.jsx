@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getOrderByUserId, getOrderedPizzaByOrderId } from "../api/orders";
 import { getOrderedSidesByOrderId } from "../api/sides";
+import { CartContext } from "../contexts/Cart";
 import FormatDate from "../components/FormatDate";
 import useAuth from "../hooks/useAuth";
 
@@ -10,6 +11,8 @@ const UserProfile = () => {
   const [orders, setOrders] = useState([]);
   const [orderedPizzas, setOrderedPizzas] = useState({});
   const [orderedSides, setOrderedSides] = useState({});
+
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const getUserOrders = async () => {
@@ -61,6 +64,10 @@ const UserProfile = () => {
     loadOrderedPizzasAndSides();
   }, [orders]);
 
+  const handleAddToCart = () => {
+    console.log("handleAddToCart");
+  };
+
   console.log("orders from UserProfile:", orders);
   console.log("orderedPizzas from UserProfile:", orderedPizzas);
   console.log("orderedSides from UserProfile:", orderedSides);
@@ -99,64 +106,91 @@ const UserProfile = () => {
                       <FormatDate dateString={order.order_date} />
                     </span>
                   </div>
-                  <div>
-                    {orderedPizzas[order.order_id] &&
-                      orderedPizzas[order.order_id].map(
-                        (orderedPizza, pizzaIndex) => (
-                          <div key={pizzaIndex}>
-                            <h2 className="order-heading">Ordered Pizza:</h2>
+                  <div className="flex justify-between shadow-lg mb-4">
+                    <span>
+                      {orderedPizzas[order.order_id] &&
+                        orderedPizzas[order.order_id].map(
+                          (orderedPizza, pizzaIndex) => (
+                            <div key={pizzaIndex}>
+                              <h2 className="order-heading">Ordered Pizza:</h2>
 
-                            <p>
-                              <span className="font-bold">Price: </span>
-                              <span>{orderedPizza.ordered_pizza_price}</span>
-                            </p>
-                            <p>
-                              <span className="font-bold">Toppings: </span>{" "}
-                              {orderedPizza.ordered_pizza_toppings.map(
-                                (topping, toppingIndex) => (
-                                  <span key={toppingIndex}>
-                                    {topping.title}
-                                    {toppingIndex <
-                                    orderedPizza.ordered_pizza_toppings.length -
-                                      1
-                                      ? ", "
-                                      : ""}
-                                  </span>
-                                )
-                              )}
-                            </p>
-                            <p>
-                              <span className="font-bold">Crust: </span>
-                              <span>{orderedPizza.ordered_pizza_crust}</span>
-                            </p>
-                            <p>
-                              <span className="font-bold">Sauce: </span>
-                              <span>{orderedPizza.ordered_pizza_sauce}</span>
-                            </p>
-                          </div>
-                        )
-                      )}
+                              <p>
+                                <span className="font-bold">Price: </span>
+                                <span>{orderedPizza.ordered_pizza_price}</span>
+                              </p>
+                              <p>
+                                <span className="font-bold">Toppings: </span>{" "}
+                                {orderedPizza.ordered_pizza_toppings.map(
+                                  (topping, toppingIndex) => (
+                                    <span key={toppingIndex}>
+                                      {topping.title}
+                                      {toppingIndex <
+                                      orderedPizza.ordered_pizza_toppings
+                                        .length -
+                                        1
+                                        ? ", "
+                                        : ""}
+                                    </span>
+                                  )
+                                )}
+                              </p>
+                              <p>
+                                <span className="font-bold">Crust: </span>
+                                <span>{orderedPizza.ordered_pizza_crust}</span>
+                              </p>
+                              <p>
+                                <span className="font-bold">Sauce: </span>
+                                <span>{orderedPizza.ordered_pizza_sauce}</span>
+                              </p>
+                            </div>
+                          )
+                        )}
+                    </span>
+                    <span className="flex flex-col justify-end mb-2">
+                      <div>
+                        <button
+                          className="h-8 bg-blue-400 text-white font-bold px-1 py-1 rounded-lg hover:bg-blue-600 hover:font-extrabold shadow-lg"
+                          onClick={() => {
+                            addToCart(orderedPizza);
+                          }}
+                        >
+                          Order Again
+                        </button>
+                      </div>
+                    </span>
                   </div>
                 </div>
                 <div>
-                  <div>
-                    {orderedSides[order.order_id] &&
-                      orderedSides[order.order_id].map(
-                        (orderedSide, sideIndex) => (
-                          <div key={sideIndex}>
-                            <h2 className="order-heading">Ordered Side:</h2>
-                            <p>
-                              <span className="font-bold">Name: </span>
-                              <span>{orderedSide.side_option_title}</span>
-                            </p>
+                  <div className="flex justify-between shadow-lg mb-4">
+                    <span>
+                      {orderedSides[order.order_id] &&
+                        orderedSides[order.order_id].map(
+                          (orderedSide, sideIndex) => (
+                            <div key={sideIndex}>
+                              <h2 className="order-heading">Ordered Side:</h2>
+                              <p>
+                                <span className="font-bold">Name: </span>
+                                <span>{orderedSide.side_option_title}</span>
+                              </p>
 
-                            <p>
-                              <span className="font-bold">Price: </span>
-                              <span>{orderedSide.side_option_price}</span>
-                            </p>
-                          </div>
-                        )
-                      )}
+                              <p>
+                                <span className="font-bold">Price: </span>
+                                <span>{orderedSide.side_option_price}</span>
+                              </p>
+                            </div>
+                          )
+                        )}
+                    </span>
+                    <span className="flex flex-col justify-end mb-2">
+                      <div>
+                        <button
+                          className="h-8 bg-blue-400 text-white font-bold px-1 py-1 rounded-lg hover:bg-blue-600 hover:font-extrabold shadow-lg"
+                          onClick={handleAddToCart}
+                        >
+                          Order Again
+                        </button>
+                      </div>
+                    </span>
                   </div>
                 </div>
               </div>
