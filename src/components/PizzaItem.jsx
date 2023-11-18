@@ -6,8 +6,9 @@ const PizzaItem = ({
   pizza,
   
 }) => {
+  console.log("pizza from PizzaItem:", pizza);
   const { addToCart } = useContext(CartContext);
-  console.log("pizza from PizzaItem:", pizza)
+  
   return (
     <div className="border-black border-2 rounded-lg shadow-lg mb-2 p-2">
       <div className="flex justify-between font-bold text-sm lg:text-base">

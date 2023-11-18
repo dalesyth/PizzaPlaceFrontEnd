@@ -3,6 +3,8 @@ import { useState, useEffect, useContext } from "react";
 import { getOrderByUserId, getOrderedPizzaByOrderId } from "../api/orders";
 import { getOrderedSidesByOrderId } from "../api/sides";
 import { CartContext } from "../contexts/Cart";
+import PizzaItem from "../components/PizzaItem";
+import SideItem from "../components/SideItem";
 import FormatDate from "../components/FormatDate";
 import useAuth from "../hooks/useAuth";
 
@@ -64,9 +66,7 @@ const UserProfile = () => {
     loadOrderedPizzasAndSides();
   }, [orders]);
 
-  const handleAddToCart = () => {
-    console.log("handleAddToCart");
-  };
+  
 
   console.log("orders from UserProfile:", orders);
   console.log("orderedPizzas from UserProfile:", orderedPizzas);
@@ -106,12 +106,22 @@ const UserProfile = () => {
                       <FormatDate dateString={order.order_date} />
                     </span>
                   </div>
-                  <div className="flex justify-between shadow-lg mb-4">
-                    <span>
-                      {orderedPizzas[order.order_id] &&
-                        orderedPizzas[order.order_id].map(
-                          (orderedPizza, pizzaIndex) => (
-                            <div key={pizzaIndex}>
+                  <div className="ml-2 mb-4">
+                    <h2 className="order-heading">Ordered Pizza:</h2>
+                    {orderedPizzas[order.order_id] &&
+                      orderedPizzas[order.order_id].map((pizza, index) => (
+                        <PizzaItem key={index} pizza={pizza} />
+                      ))}
+                  </div>
+                  {/* <div>
+                    {orderedPizzas[order.order_id] &&
+                      orderedPizzas[order.order_id].map(
+                        (orderedPizza, pizzaIndex) => (
+                          <div
+                            key={pizzaIndex}
+                            className="flex justify-between shadow-lg mb-4"
+                          >
+                            <span>
                               <h2 className="order-heading">Ordered Pizza:</h2>
 
                               <p>
@@ -142,31 +152,42 @@ const UserProfile = () => {
                                 <span className="font-bold">Sauce: </span>
                                 <span>{orderedPizza.ordered_pizza_sauce}</span>
                               </p>
-                            </div>
-                          )
-                        )}
-                    </span>
-                    <span className="flex flex-col justify-end mb-2">
-                      <div>
-                        <button
-                          className="h-8 bg-blue-400 text-white font-bold px-1 py-1 rounded-lg hover:bg-blue-600 hover:font-extrabold shadow-lg"
-                          onClick={() => {
-                            addToCart(orderedPizza);
-                          }}
-                        >
-                          Order Again
-                        </button>
-                      </div>
-                    </span>
-                  </div>
+                            </span>
+                            <span className="flex flex-col justify-end mb-2">
+                              <div>
+                                <button
+                                  className="h-8 bg-blue-400 text-white font-bold px-1 py-1 rounded-lg hover:bg-blue-600 hover:font-extrabold shadow-lg"
+                                  onClick={() => {
+                                    addToCart(orderedPizza);
+                                  }}
+                                >
+                                  Order Again
+                                </button>
+                              </div>
+                            </span>
+                          </div>
+                        )
+                      )}
+                  </div> */}
                 </div>
                 <div>
-                  <div className="flex justify-between shadow-lg mb-4">
-                    <span>
-                      {orderedSides[order.order_id] &&
-                        orderedSides[order.order_id].map(
-                          (orderedSide, sideIndex) => (
-                            <div key={sideIndex}>
+                  <div className="ml-2 mb-4">
+                    <h2 className="order-heading">Ordered Side:</h2>
+                    {orderedSides[order.order_id] &&
+                      orderedSides[order.order_id].map((side, index) => (
+                        <SideItem key={index} side={side} />
+                      ))}
+                  </div>
+
+                  {/* <div>
+                    {orderedSides[order.order_id] &&
+                      orderedSides[order.order_id].map(
+                        (orderedSide, sideIndex) => (
+                          <div
+                            key={sideIndex}
+                            className="flex justify-between shadow-lg mb-4"
+                          >
+                            <span>
                               <h2 className="order-heading">Ordered Side:</h2>
                               <p>
                                 <span className="font-bold">Name: </span>
@@ -177,21 +198,23 @@ const UserProfile = () => {
                                 <span className="font-bold">Price: </span>
                                 <span>{orderedSide.side_option_price}</span>
                               </p>
-                            </div>
-                          )
-                        )}
-                    </span>
-                    <span className="flex flex-col justify-end mb-2">
-                      <div>
-                        <button
-                          className="h-8 bg-blue-400 text-white font-bold px-1 py-1 rounded-lg hover:bg-blue-600 hover:font-extrabold shadow-lg"
-                          onClick={handleAddToCart}
-                        >
-                          Order Again
-                        </button>
-                      </div>
-                    </span>
-                  </div>
+                            </span>
+                            <span className="flex flex-col justify-end mb-2">
+                              <div>
+                                <button
+                                  className="h-8 bg-blue-400 text-white font-bold px-1 py-1 rounded-lg hover:bg-blue-600 hover:font-extrabold shadow-lg"
+                                  onClick={() => {
+                                    addToCart(orderedSide);
+                                  }}
+                                >
+                                  Order Again
+                                </button>
+                              </div>
+                            </span>
+                          </div>
+                        )
+                      )}
+                  </div> */}
                 </div>
               </div>
             ))}
