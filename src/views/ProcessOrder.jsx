@@ -78,6 +78,7 @@ const ProcessOrder = () => {
         try {
           const orderedPizza = await addPizzaToOrder({
             order_id: userOrder.order_id,
+            title: cartItem.title,
             pizza_price: cartItem.price,
             quantity: cartItem.quantity,
             crust: cartItem.crustId,
