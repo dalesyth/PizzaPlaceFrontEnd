@@ -74,7 +74,7 @@ const ProcessOrder = () => {
     console.log("cartTotal from handleCheckout:", cartTotal);
 
     for (const cartItem of cartItems) {
-      if (cartItem.pizza_id || cartItem.title === "Custom Pizza") {
+      if (cartItem.pizza_id || cartItem.ordered_pizza_id || cartItem.title === "Custom Pizza") {
         try {
           const orderedPizza = await addPizzaToOrder({
             order_id: userOrder.order_id,
@@ -86,6 +86,8 @@ const ProcessOrder = () => {
           });
 
           const pizzaId = orderedPizza.ordered_pizza_id;
+
+          console.log("pizzaId from orderedPizza:", pizzaId);
 
           if (Array.isArray(cartItem.toppings)) {
             for (const topping of cartItem.toppings) {
