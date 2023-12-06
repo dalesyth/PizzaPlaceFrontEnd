@@ -2,9 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { registerUser } from "../api/users";
 
-
 const Register = () => {
-  
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,10 +25,10 @@ const Register = () => {
     console.log(email);
   };
 
-  const handlePassword = (event => {
+  const handlePassword = (event) => {
     setPassword(event.target.value);
     console.log(password);
-  });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,13 +53,12 @@ const Register = () => {
       document.cookie = `token=${token}; Path=/; SameSite=Strict`;
 
       // Redirect to the home page or any other page you want
-      navigate("/home");
+      navigate("/login");
     } catch (error) {
       console.error(error);
       setError(error.message || "Registration failed");
     }
   };
-
 
   return (
     <>

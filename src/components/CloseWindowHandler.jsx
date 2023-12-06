@@ -9,10 +9,17 @@ const CloseWindowHandler = ({ onWindowClose }) => {
       }
     };
 
+    const handleUnload = () => {
+      // Additional cleanup or logout logic if needed
+      handleWindowClose();
+    };
+
     window.addEventListener("beforeunload", handleWindowClose);
+    window.addEventListener("unload", handleUnload);
 
     return () => {
       window.removeEventListener("beforeunload", handleWindowClose);
+      window.removeEventListener("unload", handleUnload);
     };
   }, [onWindowClose]);
 
