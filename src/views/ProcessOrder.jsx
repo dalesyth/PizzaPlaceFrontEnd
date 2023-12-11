@@ -10,15 +10,19 @@ import {
 import { guestUser } from "../api/users";
 import useAuth from "../hooks/useAuth";
 
+
 const ProcessOrder = () => {
   const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  
 
   const navigate = useNavigate();
 
   const { auth, isLoggedIn } = useAuth();
+
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -69,12 +73,18 @@ const ProcessOrder = () => {
       order_total: cartTotal,
     });
 
+    console.log("userOrder from createNewOrder:", userOrder);
+
     console.log("cartItems from handleCheckout:", cartItems);
 
     console.log("cartTotal from handleCheckout:", cartTotal);
 
     for (const cartItem of cartItems) {
-      if (cartItem.pizza_id || cartItem.ordered_pizza_id || cartItem.title === "Custom Pizza") {
+      if (
+        cartItem.pizza_id ||
+        cartItem.ordered_pizza_id ||
+        cartItem.title === "Custom Pizza"
+      ) {
         try {
           const orderedPizza = await addPizzaToOrder({
             order_id: userOrder.order_id,
@@ -116,6 +126,8 @@ const ProcessOrder = () => {
         });
       }
     }
+
+    alert("Thank you for your order!")
 
     clearCart();
     navigate("/cart");
@@ -206,6 +218,7 @@ const ProcessOrder = () => {
           </div>
         </div>
       </div>
+      
     </>
   );
 };

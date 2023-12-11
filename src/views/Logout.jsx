@@ -38,17 +38,12 @@ const Logout = () => {
               <div className="text-center">
                 <label className="text-3xl">You have been logged out!</label>
               </div>
-              <div>
-                <br />
+              <div className="flex justify-center mt-6 underline text-blue-500 hover:text-blue-600">
+                
                 <Link to={`/home`} className="hover:text-blue-600">
                   Home
                 </Link>
-                <Link
-                  to={`/register`}
-                  className="float-right hover:text-blue-600"
-                >
-                  Register
-                </Link>
+                
               </div>
             </div>
           </div>

@@ -118,9 +118,9 @@ const Register = () => {
                 >
                   Register
                 </button>
-                <button className="flex justify-center bg-gray-300 rounded-lg font-bold p-1.5 m-1 hover:bg-gray-400">
+                {/* <button className="flex justify-center bg-gray-300 rounded-lg font-bold p-1.5 m-1 hover:bg-gray-400">
                   <Link to={`/home`}>Cancel</Link>
-                </button>
+                </button> */}
               </form>
               {error && <p className="text-red-500">{error}</p>}
             </div>
