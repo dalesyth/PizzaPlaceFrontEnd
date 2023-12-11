@@ -1,17 +1,15 @@
 import { useContext } from "react";
 import { CartContext } from "../contexts/Cart";
 import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+
 
 const Cart = () => {
   const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
     useContext(CartContext);
 
-  const { auth } = useAuth();
+  
 
-  console.log("auth from cart:", auth);
-
-  console.log("cartItems from cart:", cartItems);
+  
 
   return (
     <>

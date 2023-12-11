@@ -21,11 +21,11 @@ export const AuthProvider = ({ children }) => {
 
     if (tokenRow) {
       const token = tokenRow.split("=")[1];
-      console.log("Extracted token:", token);
+      
 
       setAuth((prevAuth) => ({ ...prevAuth, token: token }));
     }
-    console.log("Updated auth:", auth);
+    
   }, [setAuth, auth]); // Include setAuth and auth as dependencies
 
   const isLoggedIn = () => {

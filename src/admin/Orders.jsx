@@ -16,8 +16,6 @@ const Orders = () => {
     }
   }
 
-  console.log("orders from Orders component:", orders);
-
   return (
     <div className="flex-col rounded-lg h-100 w-max bg-gray-200">
       <div id="body" className="flex justify-center font-bold mb-6">

@@ -34,36 +34,7 @@ const BuildPizza = () => {
     }
   };
 
-  // const handleToppingChange = (toppingId) => {
-  //   setSelectedToppings((prevToppings) => {
-  //     const isSelected = prevToppings.some(
-  //       (topping) => topping.toppingId === toppingId
-  //     );
-
-  //     console.log("prevToppings:", prevToppings);
-  //     console.log("isSelected:", isSelected);
-
-  //     if (isSelected) {
-  //       return prevToppings.filter(
-  //         (topping) => topping.toppingId !== toppingId
-  //       );
-  //     } else {
-  //       return [...prevToppings, { toppingId }];
-  //     }
-  //   });
-  // };
-
-
-
-
-
-
-
   const handleAddToCart = () => {
-    console.log("Selected Crust:", selectedCrust);
-    console.log("Selected Sauce:", selectedSauce);
-    console.log("Selected Toppings:", selectedToppings);
-
     if (selectedCrust && selectedSauce) {
       const pizza = {
         title: "Custom Pizza",
@@ -73,8 +44,6 @@ const BuildPizza = () => {
         toppings: selectedToppings,
         quantity: 1,
       };
-
-      console.log("pizza from handleAddToCart:", pizza);
 
       addToCart(pizza);
 
@@ -165,7 +134,7 @@ const BuildPizza = () => {
                     onChange={() => handleToppingChange(topping.topping_id)}
                     className="mr-2"
                   />
-                  
+
                   <label htmlFor={`topping-${topping.topping_id}`}>
                     {topping.title}
                   </label>

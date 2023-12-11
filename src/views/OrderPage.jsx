@@ -6,8 +6,7 @@ import { useStaticData } from "../contexts/StaticDataProvider";
 const OrderPage = () => {
   const { pizzas, sides, isLoadingPizzas, isLoadingSides } = useStaticData();
 
-  console.log("pizzas:", pizzas);
-  console.log("sides:", sides);
+  
 
   return (
     <>

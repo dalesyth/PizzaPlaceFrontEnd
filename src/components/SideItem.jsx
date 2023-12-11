@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../contexts/Cart";
 
 const SideItem = ({ side }) => {
-  console.log("side from SideItem:", side)
+  
   const { addToCart } = useContext(CartContext);
 
   return (

@@ -10,7 +10,7 @@ const useAuth = () => {
     // Check for the presence of the token in cookies
     const token = Cookies.get("token");
 
-    console.log("Token from js-cookie:", token);
+   
 
     setToken(token);
   }, []); // Empty dependency array, so this effect runs only once when the component mounts

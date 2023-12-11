@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../api/users";
 import useAuth from "../hooks/useAuth";
-import axiosInstance from "../api/axios";
+
 
 const Logout = () => {
   const { setAuth } = useAuth();

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
@@ -79,14 +79,10 @@ const Header = () => {
                   </Link>
                 </li>
               )}
-              {/* <li>
-                <Link to="/login" id="login" onClick={toggleMenu}>
-                  Login
-                </Link>
-              </li> */}
+              
               <li>
                 <Link to="/cart" id="cart" onClick={toggleMenu}>
-                  {/* <FontAwesomeIcon icon={faCartShopping} className="text-xl" />{" "} */}
+                  
                   Cart
                 </Link>
               </li>

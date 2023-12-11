@@ -8,7 +8,7 @@ const Home = () => {
 
   {isLoggedIn() ? console.log("isLoggedIn is true") : console.log("isLoggedIn is false")}
 
-  console.log("auth from Home:", auth)
+  
 
   const handleWindowClose = () => {
    // Logout the user when the window is closed
@@ -23,7 +23,7 @@ const Home = () => {
         <div className="flex justify-center pb-6">
           <OrderButton />
         </div>
-        {/* {console.log("auth from home: ", auth)} */}
+        
         {isLoggedIn() ? (
           <h1 className="flex justify-center text-3xl font-bold mb-4 lg:mb-6">
             Welcome to The Pizza Place, {auth?.firstName}!

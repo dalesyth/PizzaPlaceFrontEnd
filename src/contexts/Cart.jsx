@@ -10,8 +10,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (item) => {
     
-    console.log("item from addToCart:", item)
-    // console.log("item.title from addToCart:", item.title)
+    
     
     const isItemInCart = cartItems.find((cartItem) => cartItem.title === item.title);
 
@@ -21,7 +20,7 @@ export const CartProvider = ({ children }) => {
     
 
     if (isItemInCart) {
-        // console.log("isItemInCart is truthy")
+        
       setCartItems(
         cartItems.map((cartItem) =>
           cartItem.id === item.id
@@ -30,7 +29,7 @@ export const CartProvider = ({ children }) => {
         )
       );
     } else {
-        // console.log("isItemInCart is falsy")
+        
       setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
     navigate("/cart")
@@ -71,7 +70,7 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  // console.log("cartItems from Cart context:", cartItems)
+
 
   return (
     <CartContext.Provider

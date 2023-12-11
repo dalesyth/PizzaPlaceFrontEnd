@@ -69,9 +69,7 @@ const UserProfile = () => {
     loadOrderedPizzasAndSides();
   }, [orders]);
 
-  console.log("orders from UserProfile:", orders);
-  console.log("orderedPizzas from UserProfile:", orderedPizzas);
-  console.log("orderedSides from UserProfile:", orderedSides);
+  
 
   return (
     <>

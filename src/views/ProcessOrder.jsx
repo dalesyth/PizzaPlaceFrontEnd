@@ -10,19 +10,15 @@ import {
 import { guestUser } from "../api/users";
 import useAuth from "../hooks/useAuth";
 
-
 const ProcessOrder = () => {
   const { cartItems, clearCart, getCartTotal } = useContext(CartContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  
 
   const navigate = useNavigate();
 
   const { auth, isLoggedIn } = useAuth();
-
-  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,25 +31,16 @@ const ProcessOrder = () => {
     setterFunction(event.target.value);
   };
 
-  console.log("firstName:", firstName);
-  console.log("lastName:", lastName);
-  console.log("email:", email);
-
   const handleSubmitOrder = async () => {
     let userId;
 
     if (isLoggedIn()) {
-      console.log("isLoggedIn from submit order is truthy");
-      console.log("auth.userId from if stmt:", auth.userId);
       userId = auth.userId;
     } else {
-      console.log("auth.token is falsy");
       const user = await guestUser(firstName, lastName, email);
-      console.log("user from guestUser:", user);
+
       userId = user.user_id;
     }
-
-    // const user_id = auth.userId;
 
     const cartTotal = await getCartTotal();
 
@@ -63,21 +50,11 @@ const ProcessOrder = () => {
     let year = date.getFullYear();
     let currentDate = `${month}-${day}-${year}`;
 
-    console.log("current date: ", currentDate);
-
-    console.log("userId from handleSubmitOrder:", userId);
-
     const userOrder = await createNewOrder({
       user_id: userId,
       order_date: currentDate,
       order_total: cartTotal,
     });
-
-    console.log("userOrder from createNewOrder:", userOrder);
-
-    console.log("cartItems from handleCheckout:", cartItems);
-
-    console.log("cartTotal from handleCheckout:", cartTotal);
 
     for (const cartItem of cartItems) {
       if (
@@ -96,8 +73,6 @@ const ProcessOrder = () => {
           });
 
           const pizzaId = orderedPizza.ordered_pizza_id;
-
-          console.log("pizzaId from orderedPizza:", pizzaId);
 
           if (Array.isArray(cartItem.toppings)) {
             for (const topping of cartItem.toppings) {
@@ -127,13 +102,11 @@ const ProcessOrder = () => {
       }
     }
 
-    alert("Thank you for your order!")
+    alert("Thank you for your order!");
 
     clearCart();
     navigate("/cart");
   };
-
-  console.log("auth from ProcessOrder:", auth);
 
   {
     isLoggedIn() ? console.log("registered user") : console.log("guest user");
@@ -171,7 +144,6 @@ const ProcessOrder = () => {
                       className="p-1 mb-2 w-full"
                       type="text"
                       value={firstName}
-                      // onChange={handleFirstName}
                       onChange={(event) => handleInput(event, setFirstName)}
                       placeholder="First Name"
                       required
@@ -181,7 +153,6 @@ const ProcessOrder = () => {
                       className="p-1 mb-2 w-full"
                       type="text"
                       value={lastName}
-                      // onChange={handleLastName}
                       onChange={(event) => handleInput(event, setLastName)}
                       placeholder="Last Name"
                       required
@@ -191,7 +162,6 @@ const ProcessOrder = () => {
                       className="p-1 w-full"
                       type="text"
                       value={email}
-                      // onChange={handleEmail}
                       onChange={(event) => handleInput(event, setEmail)}
                       placeholder="Email"
                       required
@@ -218,7 +188,6 @@ const ProcessOrder = () => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };

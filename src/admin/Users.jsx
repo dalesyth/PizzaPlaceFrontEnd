@@ -2,27 +2,29 @@ import { getAllUsers, deleteUser } from "../api/users";
 import { useFetchData } from "../hooks/useFetchData";
 import useAuth from "../hooks/useAuth";
 
-
 const Users = () => {
-  const { data: users, isLoading: isLoadingUsers, error, refetch } = useFetchData(getAllUsers);
+  const {
+    data: users,
+    isLoading: isLoadingUsers,
+    error,
+    refetch,
+  } = useFetchData(getAllUsers);
 
   const { auth } = useAuth();
 
   const handleDeleteUser = async (userId) => {
-    const token = auth.token
-    
+    const token = auth.token;
+
     try {
-      // Call your API function to delete the user
       await deleteUser({ userId, token });
 
-      // After deletion, refetch the data to update the UI
       refetch();
     } catch (error) {
       console.error("Error deleting user:", error);
     }
   };
 
-  console.log("users from Users component:", users);
+  
 
   return (
     <div className="flex-col rounded-lg h-100 w-max bg-gray-200">

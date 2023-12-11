@@ -7,7 +7,7 @@ export async function getAllOrders() {
         "Content-Type": "application/json",
       },
     });
-    console.log("response.data from getAllOrders api call:", response.data);
+    
     return response.data;
   } catch (error) {
     console.error("Error getting all orders:", error)
@@ -53,7 +53,7 @@ export async function getOrderedPizzaByOrderId(order_id) {
 }
 
 export async function createNewOrder({ user_id, order_date, order_total }) {
-  console.log("user_id from createNewOrder: ", user_id);
+  
   try {
     const response = await axiosInstance.post(
       "/orders",
@@ -84,7 +84,7 @@ export async function addPizzaToOrder({
   crust,
   sauce,
 }) {
-  console.log("title from addPizzaToOrder:", title)
+  
   try {
     const response = await axiosInstance.post(
       "/ordered-pizza",
@@ -102,7 +102,7 @@ export async function addPizzaToOrder({
         },
       }
     );
-    console.log("response.data from addPizzaToOrder:", response.data);
+    
     return response.data;
   } catch (error) {
     console.error("Error adding pizza to order: ", error);
@@ -131,7 +131,7 @@ export async function attachToppingsToOrderedPizza({ topping_id, pizza_id }) {
       );
 
       responses.push(response.data);
-      console.log(`Topping ${toppingId} attached to ordered pizza ${pizza_id}`);
+      
     } catch (error) {
       console.error(
         `Error attaching topping ${toppingId} to ordered pizza ${pizza_id}:`,
@@ -139,7 +139,7 @@ export async function attachToppingsToOrderedPizza({ topping_id, pizza_id }) {
       );
     }
   }
-  console.log("responses from attachToppingsToOrderedPizza:", responses)
+  
   return responses;
 }
 
