@@ -18,12 +18,12 @@ export function useFetchData(apiFunction) {
     }
   };
 
-  // Initial fetch on mount
+  
   useEffect(() => {
     fetchData();
   }, [apiFunction]);
 
-  // Refetch function to be used in components
+  
   const refetch = () => {
     setIsLoading(true);
     fetchData();

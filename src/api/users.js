@@ -1,5 +1,5 @@
 import axiosInstance from "./axios";
-import useAuth from "../hooks/useAuth";
+
 
 export async function getAllUsers() {
   try {

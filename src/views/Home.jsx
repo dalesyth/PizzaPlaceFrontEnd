@@ -11,7 +11,7 @@ const Home = () => {
   
 
   const handleWindowClose = () => {
-   // Logout the user when the window is closed
+   
    setAuth({});
    localStorage.removeItem("auth");
   };

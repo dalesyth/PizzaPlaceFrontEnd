@@ -7,13 +7,13 @@ const useAuth = () => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    // Check for the presence of the token in cookies
+    
     const token = Cookies.get("token");
 
    
 
     setToken(token);
-  }, []); // Empty dependency array, so this effect runs only once when the component mounts
+  }, []); 
 
   useDebugValue(auth, (auth) => (isLoggedIn ? "Logged In" : "Logged Out"));
 

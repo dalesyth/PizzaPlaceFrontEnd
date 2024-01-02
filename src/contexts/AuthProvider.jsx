@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   }, [auth]);
 
   useEffect(() => {
-    // Check for the presence of the token in cookies
+    
     const tokenRow = document.cookie
       .split("; ")
       .find((row) => row.startsWith("token="));
@@ -26,10 +26,10 @@ export const AuthProvider = ({ children }) => {
       setAuth((prevAuth) => ({ ...prevAuth, token: token }));
     }
     
-  }, [setAuth, auth]); // Include setAuth and auth as dependencies
+  }, [setAuth, auth]);
 
   const isLoggedIn = () => {
-    // Check if auth has a token and is not an empty object
+    
     return Object.keys(auth).length > 0;
   };
 

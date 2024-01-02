@@ -46,13 +46,13 @@ const Register = () => {
     try {
       const response = await registerUser(firstName, lastName, email, password);
 
-      // Assuming your server sends a token in the response
+      
       const token = response.token;
 
-      // Set the token as a cookie
+      
       document.cookie = `token=${token}; Path=/; SameSite=Strict`;
 
-      // Redirect to the home page or any other page you want
+      
       navigate("/login");
     } catch (error) {
       console.error(error);

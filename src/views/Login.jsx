@@ -31,8 +31,7 @@ const Login = () => {
       const userId = response.user.user_id;
       const admin = response.user.is_admin;
 
-      // Token is now stored as a cookie
-      // No need to handle it in state
+      
       setAuth({ userId, firstName, lastName, email, admin });
 
       setEmail("");

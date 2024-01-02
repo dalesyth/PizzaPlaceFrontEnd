@@ -47,13 +47,13 @@ const UserProfile = () => {
     const loadOrderedPizzasAndSides = async () => {
       const promises = orders.map(fetchOrderedPizzasAndSides);
 
-      // Use Promise.all to wait for all the asynchronous calls to complete
+      
       const results = await Promise.all(promises);
 
-      // Filter out any failed results (e.g., where fetching pizzas or sides failed)
+      
       const validResults = results.filter((result) => result !== null);
 
-      // Organize the valid results into an object for easier access
+      
       const orderedPizzasData = {};
       const orderedSidesData = {};
 

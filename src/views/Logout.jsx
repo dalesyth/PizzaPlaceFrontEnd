@@ -11,10 +11,10 @@ const Logout = () => {
     
 
     const handleLogout = async () => {
-      // Clear the token on the client side
+      
       setAuth({});
 
-      // Logout on the server side
+     
       try {
         await logoutUser();
         console.log("Logout successful");
@@ -22,7 +22,7 @@ const Logout = () => {
         console.error("Error logging out user:", error);
       }
 
-      // Remove the token from localStorage if you are using it for persistent storage
+      
       localStorage.removeItem("auth");
     };
 

@@ -93,7 +93,7 @@ ul.leaders span + span {
 
 @media (min-width: 768px) {
   .link-button {
-    font-size: 1rem; /* Adjust font size for larger screens */
+    font-size: 1rem;
   }
   .small-screen-text {
     display: none;

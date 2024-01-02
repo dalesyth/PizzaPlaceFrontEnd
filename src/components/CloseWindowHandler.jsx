@@ -1,4 +1,3 @@
-// CloseWindowHandler.jsx
 import { useEffect } from "react";
 
 const CloseWindowHandler = ({ onWindowClose }) => {
@@ -10,7 +9,7 @@ const CloseWindowHandler = ({ onWindowClose }) => {
     };
 
     const handleUnload = () => {
-      // Additional cleanup or logout logic if needed
+      
       handleWindowClose();
     };
 
@@ -23,7 +22,7 @@ const CloseWindowHandler = ({ onWindowClose }) => {
     };
   }, [onWindowClose]);
 
-  return null; // This component doesn't render anything
+  return null;
 };
 
 export default CloseWindowHandler;

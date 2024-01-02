@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 
-
-
 const Admin = () => {
-  
   return (
-   
     <>
       <div className="bg-gray-500/50 fixed top-0 left-0 w-full h-screen">
         <div className="flex justify-center items-center  py-28">
